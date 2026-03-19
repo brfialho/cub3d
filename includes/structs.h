@@ -1,22 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 16:30:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/19 19:11:08 by brfialho         ###   ########.fr       */
+/*   Created: 2026/03/19 18:43:08 by brfialho          #+#    #+#             */
+/*   Updated: 2026/03/19 19:07:09 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-# include "libft.h"
-# include "defines.h"
-# include "structs.h"
+#include "libft.h"
 
-void	placeholder(void);
+typedef struct s_texture
+{
+	char	*path[4];
+	int 	colours[2];
+} t_texture;
+
+typedef struct s_mlx
+{
+	void	*mlx_ptr;
+} t_mlx;
+
+typedef struct s_game
+{
+	t_tab		map;
+	t_mlx		mlx;
+	t_texture	texture;
+} t_game;
+
 
 #endif
