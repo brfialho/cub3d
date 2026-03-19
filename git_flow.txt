@@ -1,0 +1,26 @@
+MERGE FLOW:
+
+git switch pre_main
+git pull
+se tiver pull
+	git switch minha_branch
+	git merge pre_main
+	testa
+	git push
+
+git switch pre_main
+git merge minha_branch
+testa
+git push
+git switch main	
+git merge pre_main
+
+SEMANTICA:
+
+fix: consertou alguma coisa
+chore: alguma parte de alguma coisa
+wip: parou no meio
+feat: terminou algo grande
+refactor: refatorar mexendo na logica
+style: refatorar sem mexer na logica
+norm: norminette
