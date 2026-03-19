@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:43:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/19 19:07:09 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/19 20:09:17 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ typedef struct s_texture
 typedef struct s_mlx
 {
 	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img[4];
+	int		width;
+	int		height;
 } t_mlx;
 
 typedef struct s_game

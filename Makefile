@@ -15,7 +15,7 @@ define LOADING
 endef
 
 DEPENDENCIES= -lXext -lX11 -lm -lz
-INCLUDES= -Iincludes -Ilibft/headers -Ilibs/mlx/ #-Itests/
+INCLUDES= -Iincludes -Ilibft/headers -Imlx #-Itests/
 CC= cc -Werror -Wextra -Wall $(INCLUDES)
 
 MAIN_SRC= srcs/main.c
