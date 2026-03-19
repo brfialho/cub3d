@@ -17,6 +17,7 @@ git merge pre_main
 
 SEMANTICA:
 
+setup: coisas se setup
 fix: consertou alguma coisa
 chore: alguma parte de alguma coisa
 wip: parou no meio
