@@ -18,13 +18,21 @@ DEPENDENCIES= -lXext -lX11 -lm -lz
 INCLUDES= -Iincludes -Ilibft/headers -Ilibs/mlx/ #-Itests/
 CC= cc -Werror -Wextra -Wall $(INCLUDES)
 
-# MAIN_SRC= srcs/main.c
+MAIN_SRC= srcs/main.c
 
-SRC= srcs/main.c
+ifeq ($(findstring bruno, $(MAKECMDGOALS)), bruno)
+	MAIN_SRC = srcs/dev_main_brfialho.c
+endif
+
+ifeq ($(findstring gustavo, $(MAKECMDGOALS)), gustavo)
+	MAIN_SRC = srcs/dev_main_gbercaco.c
+endif
+
+SRC= srcs/parsing/placeholder.c
 
 O_DIR= obj/
 OBJ= $(SRC:%.c=$(O_DIR)%.o)
-# MAIN_OBJ= $(MAIN_SRC:%.c=$(O_DIR)%.o)
+MAIN_OBJ= $(MAIN_SRC:%.c=$(O_DIR)%.o)
 
 NAME= cub3d
 
@@ -39,9 +47,12 @@ VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-k
 
 all: $(LIBFT) $(NAME)
 
-# missing main obj
+bruno: re_nolib
+
+gustavo: re_nolib
+
 $(NAME): $(OBJ) $(MAIN_OBJ)
-	@$(CC) $(OBJ) $(LIBFT) $(DEPENDENCIES) -o $(NAME)
+	@$(CC) $(OBJ) $(MAIN_OBJ) $(LIBFT) $(DEPENDENCIES) -o $(NAME)
 	@echo -n "\033[32m\nSuccessfully Generated $(RESET)$(NAME) \n\n"
 
 $(O_DIR)%.o: %.c
@@ -101,4 +112,4 @@ re_nolib: fclean_nolib all
 # 		valgrind -q ./$$bin; \
 # 	done
 
-.PHONY: $(LIBFT) all re fclean clean parse exec re_nolib fclean_nolib #test
+.PHONY: $(LIBFT) all re fclean clean bruno gustavo re_nolib fclean_nolib #test

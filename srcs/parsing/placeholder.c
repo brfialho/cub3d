@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   placeholder.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 16:30:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/19 17:36:14 by brfialho         ###   ########.fr       */
+/*   Created: 2026/03/19 17:32:59 by brfialho          #+#    #+#             */
+/*   Updated: 2026/03/19 17:33:15 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
-
-#include "libft.h"
-
-void	placeholder(void);
-
-#endif
+void	placeholder(void)
+{
+	return ;
+}
