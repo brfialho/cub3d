@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/19 19:27:47 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/19 19:38:21 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 t_bool	init_mlx(t_game	*game)
 {
-	game->mlx;
+	(void)game;
+	
+	return (EXIT_SUCCESS);
 }
 
 void	init_game(t_game *game)

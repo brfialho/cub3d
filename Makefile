@@ -36,8 +36,11 @@ MAIN_OBJ= $(MAIN_SRC:%.c=$(O_DIR)%.o)
 
 NAME= cub3d
 
-LIBFT= libft/libft.a
 LIBPATH= libft/
+LIBFT= $(LIBPATH)libft.a
+
+LIBMLX_PATH = mlx/
+LIBMLX = $(LIBMLX_PATH)libmlx_Linux.a
 
 #TEST_BIN_DIR= tests/bin/
 #TEST_NAMES= 
@@ -45,14 +48,14 @@ LIBPATH= libft/
 
 VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes
 
-all: $(LIBFT) $(NAME)
+all: $(LIBFT) $(LIBMLX) $(NAME)
 
 bruno: re_nolib
 
 gustavo: re_nolib
 
 $(NAME): $(OBJ) $(MAIN_OBJ)
-	@$(CC) $(OBJ) $(MAIN_OBJ) $(LIBFT) $(DEPENDENCIES) -o $(NAME)
+	@$(CC) $(OBJ) $(MAIN_OBJ) $(LIBFT) $(LIBMLX) $(DEPENDENCIES) -o $(NAME)
 	@echo -n "\033[32m\nSuccessfully Generated $(RESET)$(NAME) \n\n"
 
 $(O_DIR)%.o: %.c
@@ -64,6 +67,9 @@ $(O_DIR)%.o: %.c
 $(LIBFT):
 	@make --no-print-directory -C $(LIBPATH)
 
+$(LIBMLX):
+	@make --no-print-directory -C $(LIBMLX_PATH)
+
 # $(TEST_BIN_DIR)lexer: tests/tester_lexer/tester_lexer.c $(LIBFT) $(OBJ)
 # 	@mkdir -p $(TEST_BIN_DIR)
 # 	@echo "$(MAGENTA)Compiling test$(RESET) $(notdir $@)"
@@ -73,11 +79,14 @@ clean:
 	@echo "$(MAGENTA)Cleansing $(NAME) Objects"
 	$(LOADING)
 	@make --no-print-directory -C $(LIBPATH) clean
+	$(LOADING)
+	@make --no-print-directory -C $(LIBMLX_PATH) clean
 	@rm -rf $(O_DIR)
 	@rm -rf $(TEST_BIN_DIR)
 
 fclean:
 	@make --no-print-directory -C $(LIBPATH) fclean
+	@make --no-print-directory -C $(LIBMLX_PATH) clean
 	@echo "$(MAGENTA)Cleansing $(NAME)"
 	$(LOADING)
 	@rm -rf $(O_DIR)
