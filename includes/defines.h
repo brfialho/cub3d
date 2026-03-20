@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:46:27 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/20 20:01:23 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/20 20:47:21 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 // MLX
 # define WIN_WIDTH 1024
 # define WIN_HEIGHT 768
+
+# define WINDOW_CLOSE 17
+# define WINDOW_CLOSE_MASK 1l << 17
 
 // TEXTURES
 # define TEXTURE_COUNT 4

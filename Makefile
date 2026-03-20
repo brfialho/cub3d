@@ -46,7 +46,7 @@ LIBMLX = $(LIBMLX_PATH)libmlx_Linux.a
 #TEST_NAMES= 
 #TEST_BINARIES= $(addprefix $(TEST_BIN_DIR), $(TEST_NAMES))
 
-VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes
+VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes
 
 all: $(LIBFT) $(LIBMLX) $(NAME)
 
@@ -94,7 +94,7 @@ fclean:
 
 re: fclean all
 
-leaks: all $(valgrind)
+valgrind: all $(valgrind)
 	@$(VALGRIND) ./$(NAME)
 	
 clean_nolib:

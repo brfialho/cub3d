@@ -6,12 +6,11 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/20 20:41:24 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/20 20:51:44 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
 
 void	destroy_mlx(t_mlx *mlx)
 {
@@ -20,7 +19,7 @@ void	destroy_mlx(t_mlx *mlx)
 	i = -1;
 	while (++i < TEXTURE_COUNT)
 		if (mlx->textures[i])
-			free(mlx->textures[i]);
+			mlx_destroy_image(mlx->mlx_ptr, mlx->textures[i]);
 	if (mlx->img)
 		mlx_destroy_image(mlx->mlx_ptr, mlx->img);
 	if (mlx->win)
@@ -32,10 +31,11 @@ void	destroy_mlx(t_mlx *mlx)
 	}
 }
 
-void	destroy_game(t_game *game)
+int	destroy_game(t_game *game)
 {
 	destroy_mlx(&game->mlx);
 	exit(0);
+	return (0);
 }
 
 t_bool	init_mlx_display(t_mlx	*mlx, char **path)
@@ -45,6 +45,7 @@ t_bool	init_mlx_display(t_mlx	*mlx, char **path)
 	path[SOUTH] = "assets/teste2.xpm";
 	path[EAST] = "assets/teste3.xpm";
 	path[WEST] = "assets/teste4.xpm";
+
 	int	i;
 
 	mlx->mlx_ptr = mlx_init();
@@ -70,10 +71,7 @@ t_bool	init_mlx_display(t_mlx	*mlx, char **path)
 
 int	game_loop(t_game *game)
 {
-	static int i = 0;
-
-	// usleep(1000);
-	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win, game->mlx.textures[i++ % 2], 0, 200);
+	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win, game->mlx.textures[NORTH], 0, 200);
 	return (EXIT_SUCCESS);
 }
 
@@ -87,7 +85,7 @@ int	main(int argc, char **argv)
 	ft_bzero(&game, sizeof(t_game));
 	if (init_mlx_display(&game.mlx, game.path))
 		destroy_game(&game);
-	ft_printf("AAAA");
+	mlx_hook(game.mlx.win, WINDOW_CLOSE, WINDOW_CLOSE_MASK, destroy_game, &game);
 	mlx_loop_hook(game.mlx.mlx_ptr, game_loop, &game);
 	mlx_loop(game.mlx.mlx_ptr);
 }
