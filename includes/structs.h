@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:43:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/19 20:09:17 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/20 20:17:21 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,13 @@
 
 #include "libft.h"
 
-typedef struct s_texture
-{
-	char	*path[4];
-	int 	colours[2];
-} t_texture;
-
 typedef struct s_mlx
 {
 	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img[4];
+	void	*win;
+	void	*img;
+	void	*textures[TEXTURE_COUNT];
+	int 	colours[COLOUR_COUNT];
 	int		width;
 	int		height;
 } t_mlx;
@@ -34,7 +30,7 @@ typedef struct s_game
 {
 	t_tab		map;
 	t_mlx		mlx;
-	t_texture	texture;
+	char	*path[TEXTURE_COUNT];
 } t_game;
 
 
