@@ -28,7 +28,8 @@ ifeq ($(findstring gustavo, $(MAKECMDGOALS)), gustavo)
 	MAIN_SRC = srcs/dev_main_gbercaco.c
 endif
 
-SRC= srcs/parsing/placeholder.c
+SRC= srcs/init_destroy/destroy.c \
+	srcs/init_destroy/init.c
 
 O_DIR= obj/
 OBJ= $(SRC:%.c=$(O_DIR)%.o)
