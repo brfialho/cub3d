@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:31:11 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/21 00:04:08 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/21 00:42:39 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,32 @@
 
 #include "main.h"
 
-void	parsing(t_tab *map, char **path, int *colors, char *file)
+t_bool	validate_filename(char *file)
 {
-	(void)map;
-	(void)path;
-	(void)colors;
-	int	fd;
-	char *s;
+	int	len;
 
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		exit(1);
-	while ((s = get_next_line(fd)))
-		ft_printf("%d : %s", ft_strlen(s), s);
+	len = ft_strlen(file);
+	if (len < 5 || ft_strcmp((file + len - 4), ".cub"))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+void	parsing(t_game *game, char *file)
+{
+	(void)game;
+
+	if (validate_filename(file))
+		exit(EXIT_FAILURE);
+	// int	fd;
+	// char *s;
+
+	// fd = open(file, O_RDONLY);
+	// if (fd == -1)
+	// 	exit(1);
+	// while ((s = get_next_line(fd)))
+	// 	ft_printf("%d : %s", ft_strlen(s), s);
 	
-	close(fd);
+	// close(fd);
 }
 
 int	main(int argc, char **argv)
@@ -41,5 +52,6 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	ft_bzero(&game, sizeof(t_game));
-	parsing(&game.map, game.path, game.mlx.colors, argv[1]);
+	parsing(&game, argv[1]);
+	ft_printf("PASSOU\n");
 }
