@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:43:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/20 20:17:21 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/20 23:31:52 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_mlx
 	void	*win;
 	void	*img;
 	void	*textures[TEXTURE_COUNT];
-	int 	colours[COLOUR_COUNT];
+	int 	colors[COLOUR_COUNT];
 	int		width;
 	int		height;
 } t_mlx;
