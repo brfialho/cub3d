@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:31:11 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 02:55:39 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 03:03:43 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ t_bool	init_parser(t_parser *parser, char *file)
 	return (SUCCESS);
 }
 
-t_bool	parse_map(t_game *game, t_parser *parser)
+t_bool	check_for_missing_elements(t_game *game)
 {
-	(void)parser;
 	int	i;
 
 	i = -1;
@@ -64,13 +63,20 @@ t_bool	parse_map(t_game *game, t_parser *parser)
 	return (SUCCESS);
 }
 
+t_bool	parse_map(t_game *game, t_parser *parser)
+{
+	(void)parser;
+	if (check_for_missing_elements(game))
+		return (FAILURE);
+	return (SUCCESS);
+}
+
 t_bool	set_color(t_uint *color, char *color_str)
 {
-	char	**split;
 	t_uint	rgb[3];
+	char	**split;
 	int		i;
 
-	ft_printf("%s\n", color_str);
 	split = ft_split(color_str, ',');
 	if (ft_split_len(split) != 3 || ft_strlen(split[2]) == 1)
 		return (ft_split_free(split), FAILURE);
@@ -95,24 +101,20 @@ t_bool	parse_line(t_game *game, t_parser *parser)
 
 	if (!ft_strcmp(parser->line, "\n"))
 		return (SUCCESS);
-
 	split = ft_split(parser->line, ' ');
 	if (ft_split_len(split) != 2)
 		return (ft_split_free(split), FAILURE);
-
 	element = -1;
 	while (ft_strcmp(split[0], parser->elements[++element]))
 		if (element > TYPE_COUNT - 1)
 			return (ft_split_free(split), FAILURE);
-
 	status = SUCCESS;
 	if (element < TEXTURE_COUNT && !game->path[element])
-		game->path[element] = ft_strdup(split[1]);//, ft_printf("%s\n", game->path[element]); 
+		game->path[element] = ft_strdup(split[1]);
 	else if (game->mlx.colors[element - TEXTURE_COUNT] == NO_COLOR)
 		status = set_color(&game->mlx.colors[element - TEXTURE_COUNT], split[1]);
 	else
 		status = FAILURE;
-
 	ft_split_free(split);
 	return (status);
 }
