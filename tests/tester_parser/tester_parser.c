@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 07:28:07 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 08:42:31 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 08:52:17 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,15 @@ int main(void)
 	tests[4] = "tests/tester_parser/invalid_maps/5_extra_element.cub";
 	tests[5] = "tests/tester_parser/invalid_maps/6_extra_word_in_element_texture.cub";
 	tests[6] = "tests/tester_parser/invalid_maps/7_missing_word_in_texture.cub";
-	tests[7] = "tests/tester_parser/invalid_maps/5_extra_element.cub";
-	tests[8] = "tests/tester_parser/invalid_maps/5_extra_element.cub";
-	tests[9] = "tests/tester_parser/invalid_maps/5_extra_element.cub";
+	tests[7] = "tests/tester_parser/invalid_maps/8_missing_element_color.cub";
+	tests[8] = "tests/tester_parser/invalid_maps/9_letter_in_element_color";
+	tests[9] = "tests/tester_parser/invalid_maps/10_missing_element_color.cub";
+	tests[10] = "tests/tester_parser/invalid_maps/11_no_map.cub";
+	tests[11] = "tests/tester_parser/invalid_maps/12_invalid_char_in_map.cub";
+	tests[12] = "tests/tester_parser/invalid_maps/13_map_too_small_vertically.cub";
+	tests[13] = "tests/tester_parser/invalid_maps/14_map_too_small_horizontally.cub";
+	tests[14] = "tests/tester_parser/invalid_maps/15_open_map.cub";
+	tests[15] = "tests/tester_parser/invalid_maps/16_open_island.cub";
 
 	// tests[0] = "tests/tester_parser/valid_maps/1_basic.cub";
 
@@ -114,6 +120,12 @@ int main(void)
 	test_functions[7] = test_invalid;
 	test_functions[8] = test_invalid;
 	test_functions[9] = test_invalid;
+	test_functions[10] = test_invalid;
+	test_functions[11] = test_invalid;
+	test_functions[12] = test_invalid;
+	test_functions[13] = test_invalid;
+	test_functions[14] = test_invalid;
+	test_functions[15] = test_invalid;
 	// test_functions[0] = test_valid__basic;
 
 	int	test_len = 0;
