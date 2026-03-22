@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:56:04 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 04:56:39 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 08:21:28 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ t_bool	parse_line(t_game *game, t_parser *parser)
 			return (ft_split_free(split), FAILURE);
 	status = SUCCESS;
 	if (element < TEXTURE_COUNT && !game->path[element])
+	{
 		game->path[element] = ft_strdup(split[1]);
+		game->path[element][ft_strlen(game->path[element]) - 1] = '\0';
+	}
 	else if (game->mlx.colors[element - TEXTURE_COUNT] == NO_COLOR)
 		status = set_color(&game->mlx.colors[element - TEXTURE_COUNT], split[1]);
 	else
