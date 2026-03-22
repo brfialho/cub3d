@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:55:56 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/20 20:57:13 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 04:52:09 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ int	destroy_game(t_game *game)
 	destroy_mlx(&game->mlx);
 	exit(0);
 	return (0);
+}
+
+void	destroy_parser(t_parser *parser)
+{
+	gnl_destroy(parser->fd);
+	close(parser->fd);
+	if (parser->line)
+		free(parser->line);
 }
 
 static void	destroy_mlx(t_mlx *mlx)

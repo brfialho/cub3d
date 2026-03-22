@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:43:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/20 20:17:21 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 04:19:37 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_mlx
 	void	*win;
 	void	*img;
 	void	*textures[TEXTURE_COUNT];
-	int 	colours[COLOUR_COUNT];
+	t_uint 	colors[COLOR_COUNT];
 	int		width;
 	int		height;
 } t_mlx;
@@ -33,5 +33,13 @@ typedef struct s_game
 	char	*path[TEXTURE_COUNT];
 } t_game;
 
+typedef struct s_parser
+{
+	t_bool		has_error;
+	t_bool		in_map;
+	int			fd;
+	char		*line;
+	char		*elements[TYPE_COUNT];
+} t_parser;
 
 #endif

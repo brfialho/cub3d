@@ -29,7 +29,10 @@ ifeq ($(findstring gustavo, $(MAKECMDGOALS)), gustavo)
 endif
 
 SRC= srcs/init_destroy/destroy.c \
-	srcs/init_destroy/init.c
+	srcs/init_destroy/init.c \
+	srcs/parsing/parsing.c \
+	srcs/parsing/parse_map.c \
+	srcs/parsing/parse_line.c
 
 O_DIR= obj/
 OBJ= $(SRC:%.c=$(O_DIR)%.o)
