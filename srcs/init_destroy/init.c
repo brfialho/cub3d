@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:53:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/21 15:46:04 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 04:53:45 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,22 @@ t_bool	init_mlx_display(t_mlx	*mlx, char **path)
 	if (!mlx->win || !mlx->img)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
+}
+
+t_bool	init_parser(t_parser *parser, char *file)
+{
+	ft_bzero(parser, sizeof(t_parser));
+	parser->fd = open(file, O_RDONLY);
+	if (parser->fd == -1)
+		return (destroy_parser(parser), FAILURE);
+	parser->line = get_next_line(parser->fd);
+	if (!parser->line)
+		return (destroy_parser(parser), FAILURE);
+	parser->elements[NORTH] = "NO";
+	parser->elements[SOUTH] = "SO";
+	parser->elements[EAST] = "EA";
+	parser->elements[WEST] = "WE";
+	parser->elements[CEILING + 4] = "C";
+	parser->elements[FLOOR + 4] = "F";
+	return (SUCCESS);
 }
