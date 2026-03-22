@@ -15,7 +15,7 @@ define LOADING
 endef
 
 DEPENDENCIES= -lXext -lX11 -lm -lz
-INCLUDES= -Iincludes -Ilibft/headers -Imlx #-Itests/
+INCLUDES= -Iincludes -Ilibft/headers -Imlx -Itests/
 CC= cc -Werror -Wextra -Wall $(INCLUDES)
 
 MAIN_SRC= srcs/main.c
@@ -46,9 +46,9 @@ LIBFT= $(LIBPATH)libft.a
 LIBMLX_PATH = mlx/
 LIBMLX = $(LIBMLX_PATH)libmlx_Linux.a
 
-#TEST_BIN_DIR= tests/bin/
-#TEST_NAMES= 
-#TEST_BINARIES= $(addprefix $(TEST_BIN_DIR), $(TEST_NAMES))
+TEST_BIN_DIR= tests/bin/
+TEST_NAMES= parser
+TEST_BINARIES= $(addprefix $(TEST_BIN_DIR), $(TEST_NAMES))
 
 VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes
 
@@ -74,10 +74,10 @@ $(LIBFT):
 $(LIBMLX):
 	@make --no-print-directory -C $(LIBMLX_PATH)
 
-# $(TEST_BIN_DIR)lexer: tests/tester_lexer/tester_lexer.c $(LIBFT) $(OBJ)
-# 	@mkdir -p $(TEST_BIN_DIR)
-# 	@echo "$(MAGENTA)Compiling test$(RESET) $(notdir $@)"
-# 	@$(CC) $< $(OBJ) $(LIBFT) $(DEPENDENCIES) -o $@
+$(TEST_BIN_DIR)parser: tests/tester_parser/tester_parser.c $(LIBFT) $(LIBMLX) $(OBJ)
+	@mkdir -p $(TEST_BIN_DIR)
+	@echo "$(MAGENTA)Compiling test$(RESET) $(notdir $@)"
+	@$(CC) $< $(OBJ) $(LIBFT) $(LIBMLX) $(DEPENDENCIES) -o $@
 
 clean:
 	@echo "$(MAGENTA)Cleansing $(NAME) Objects"
@@ -115,14 +115,14 @@ fclean_nolib:
 
 re_nolib: fclean_nolib all
 
-# test: fclean_nolib
-# 	@$(MAKE) --no-print-directory $(TEST_BINARIES)
-# 	@echo "$(MAGENTA)$(BOLD)\nInitializing all unitary tests$(RESET)"
-# 	$(LOADING)
-# 	@echo -n
-# 	@for bin in $(TEST_BINARIES); do \
-# 		echo "$(BOLD)\n======= Running $$bin =======\n$(RESET)"; \
-# 		valgrind -q ./$$bin; \
-# 	done
+test: fclean_nolib
+	@$(MAKE) --no-print-directory $(TEST_BINARIES)
+	@echo "$(MAGENTA)$(BOLD)\nInitializing all unitary tests$(RESET)"
+	$(LOADING)
+	@echo -n
+	@for bin in $(TEST_BINARIES); do \
+		echo "$(BOLD)\n======= Running $$bin =======\n$(RESET)"; \
+		valgrind -q ./$$bin; \
+	done
 
 .PHONY: $(LIBFT) all re fclean clean bruno gustavo re_nolib fclean_nolib #test
