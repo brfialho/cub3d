@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 07:28:07 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 08:52:17 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 09:05:52 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,13 @@ int main(void)
 	tests[13] = "tests/tester_parser/invalid_maps/14_map_too_small_horizontally.cub";
 	tests[14] = "tests/tester_parser/invalid_maps/15_open_map.cub";
 	tests[15] = "tests/tester_parser/invalid_maps/16_open_island.cub";
+	tests[16] = "tests/tester_parser/invalid_maps/17_extra_word_in_element_color.cub";
+	tests[17] = "tests/tester_parser/invalid_maps/18_no_player_map.cub";
+	tests[18] = "tests/tester_parser/invalid_maps/19_only_walls_map.cub";
+	tests[19] = "tests/tester_parser/invalid_maps/20_more_than_one_player_map.cub";
 
-	// tests[0] = "tests/tester_parser/valid_maps/1_basic.cub";
+
+	tests[20] = "tests/tester_parser/valid_maps/1_basic.cub";
 
 	test_functions[0] = test_invalid;
 	test_functions[1] = test_invalid;
@@ -126,7 +131,12 @@ int main(void)
 	test_functions[13] = test_invalid;
 	test_functions[14] = test_invalid;
 	test_functions[15] = test_invalid;
-	// test_functions[0] = test_valid__basic;
+	test_functions[16] = test_invalid;
+	test_functions[17] = test_invalid;
+	test_functions[18] = test_invalid;
+	test_functions[19] = test_invalid;
+
+	test_functions[20] = test_valid__basic;
 
 	int	test_len = 0;
 	while (tests[test_len])
