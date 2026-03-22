@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:56:57 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 04:58:05 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 05:59:07 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,13 @@ static void	set_map(t_tab *map, char *dump_map, size_t max_len)
 
 	split = ft_split(dump_map, '\n');
 	split_len = ft_split_len(split);
-	ft_tab_init_alloc(map, split_len + 1, max_len + 1, sizeof(char));
+	ft_tab_init_alloc(map, split_len, max_len - 1, sizeof(char));
+	ft_printf ("MAX: %d\n", max_len);
 	i = -1;
 	while (split[++i])
+	{
+		ft_memset(map->tab[i], ' ', max_len - 1);
 		ft_memcpy(map->tab[i], split[i], ft_strlen(split[i]));
+	}
 	ft_split_free(split);
 }
