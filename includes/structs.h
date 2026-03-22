@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:43:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/21 19:09:13 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/21 22:38:51 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,13 @@ typedef struct s_game
 	char	*path[TEXTURE_COUNT];
 } t_game;
 
-typedef struct s_texture
-{
-	char	*str;
-	t_bool	found;
-} t_texture;
-
 typedef struct s_parser
 {
+	t_bool		has_error;
+	t_bool		in_map;
 	int			fd;
 	char		*line;
-	t_texture	texture[TEXTURE_COUNT];
-	t_bool		has_error;
+	char		*elements[TYPE_COUNT];
 } t_parser;
 
 #endif
