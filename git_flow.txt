@@ -1,19 +1,24 @@
 MERGE FLOW:
 
-git switch pre_main
+git switch development
 git pull
 se tiver pull
+	testar
+	se aprovar
+		git switch main
+		git pull
+		git merge development
+		git push
+	se recusar
+		fala com amigo e cancela tudo
 	git switch minha_branch
-	git merge pre_main
+	git merge development
 	testa
 	git push
-
-git switch pre_main
+git switch development
 git merge minha_branch
-testa
 git push
-git switch main	
-git merge pre_main
+avisa o pr
 
 SEMANTICA:
 
