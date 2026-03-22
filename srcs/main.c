@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/20 20:58:38 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/21 22:28:01 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	game_loop(t_game *game)
 {
-	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win, game->mlx.textures[NORTH], 0, 200);
+	draw_floor_and_sky(&game->mlx);
+	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win, game->mlx.img, 0, 0);
+	
 	return (EXIT_SUCCESS);
 }
 

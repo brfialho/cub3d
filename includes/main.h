@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:30:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/20 20:58:20 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/21 22:26:58 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,10 @@
 
 int		destroy_game(t_game *game);
 t_bool	init_mlx_display(t_mlx	*mlx, char **path);
+
+//render
+void	put_pixel(t_mlx *mlx, int x, int y, int color);
+void	draw_floor_and_sky(t_mlx *mlx);
+
 
 #endif
