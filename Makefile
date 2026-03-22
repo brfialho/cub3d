@@ -124,5 +124,6 @@ test: fclean_nolib
 		echo "$(BOLD)\n======= Running $$bin =======\n$(RESET)"; \
 		valgrind -q ./$$bin; \
 	done
+	@rm -rf $(TEST_BIN_DIR)
 
-.PHONY: $(LIBFT) all re fclean clean bruno gustavo re_nolib fclean_nolib #test
+.PHONY: $(LIBFT) all re fclean clean bruno gustavo re_nolib fclean_nolib test
