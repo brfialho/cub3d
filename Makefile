@@ -122,7 +122,7 @@ test: fclean_nolib
 	@echo -n
 	@for bin in $(TEST_BINARIES); do \
 		echo "$(BOLD)\n======= Running $$bin =======\n$(RESET)"; \
-		valgrind -q ./$$bin; \
+		valgrind --leak-check=full --show-leak-kinds=all -q ./$$bin; \
 	done
 	@rm -rf $(TEST_BIN_DIR)
 

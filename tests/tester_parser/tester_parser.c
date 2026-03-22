@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 07:28:07 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 08:17:11 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 08:35:04 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ t_bool	test_valid__basic(t_game *game, char *file)
 	return (SUCCESS);
 }
 
+t_bool	test_invalid(t_game *game, char *file)
+{
+	return (!parsing(game, file));
+}
+
 int main(void)
 {
 	t_game	game;
@@ -86,9 +91,13 @@ int main(void)
 	char	*tests[100] = {NULL};
 	t_bool	(*test_functions[100])(t_game *, char *);
 
-	tests[0] = "tests/tester_parser/valid_maps/1_basic.cub";
+	tests[0] = "tests/tester_parser/invalid_maps/1_missing_element_texture.cub";
+	tests[1] = "tests/tester_parser/invalid_maps/2_empty.cub";
+	// tests[0] = "tests/tester_parser/valid_maps/1_basic.cub";
 
-	test_functions[0] = test_valid__basic;
+	test_functions[0] = test_invalid;
+	test_functions[1] = test_invalid;
+	// test_functions[0] = test_valid__basic;
 
 	int	test_len = 0;
 	while (tests[test_len])
