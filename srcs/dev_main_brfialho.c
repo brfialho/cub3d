@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:31:11 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 03:03:43 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 03:20:28 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ t_bool	set_color(t_uint *color, char *color_str)
 			return (ft_split_free(split), FAILURE);
 	}
 	*color = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+	ft_split_free(split);
 	return (SUCCESS);
 }
 
@@ -152,11 +153,18 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (ft_printf("Wrong number of arguments\n"));
 	ft_bzero(&game, sizeof(t_game));
-	if (parsing(&game, argv[1]))
-		ft_printf("ERROU\n"), exit(1);
-	ft_printf("PASSOU\n");
+	t_bool status = parsing(&game, argv[1]);
+	(status && ft_printf("ERROU\n")) || ft_printf("PASSOU\n");
+	int i = -1;
+	while (++i < 4)
+		if (game.path[i])
+		{
+			ft_printf("PATH[%d]: %s\n", i, game.path[i]);
+			free(game.path[i]);
+		}
+	ft_printf("HEX: %X\n", game.mlx.colors[CEILING]);
+	ft_printf("HEX: %X\n", game.mlx.colors[FLOOR]);
 }
-
 // int main()
 // {
 // 	int fd = open("maps/valid/1.cub", O_RDONLY);
