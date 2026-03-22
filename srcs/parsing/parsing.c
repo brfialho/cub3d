@@ -6,15 +6,37 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:54:42 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 07:06:29 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 09:27:08 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
 static t_bool	validate_filename(char *file);
-static t_bool	validate_map_borders(t_tab map);
-static t_bool	check_for_open_border(char **map, int row, int col);
+static t_bool	check_for_open_border(t_tab map, int row, int col);
+
+t_bool	validate_map(t_tab map)
+{
+	int	row;
+	int	col;
+	int	player_count;
+	int	floor_count;
+
+	row = -1;
+	player_count = 0;
+	floor_count = 0;
+	while (++row < (int)map.rows)
+	{
+		player_count += ft_str_charcount(((char **)map.tab)[row], )
+		col = -1;
+		while (++col < (int)map.cols)
+		{
+			if (check_for_open_border(map, row, col))
+				return (FAILURE);
+		}
+	}
+	return (SUCCESS);
+}
 
 t_bool	parsing(t_game *game, char *file)
 {
@@ -39,7 +61,7 @@ t_bool	parsing(t_game *game, char *file)
 	}
 	has_error = parser.has_error;
 	destroy_parser(&parser);
-	return (has_error || validate_map_borders(game->map));
+	return (has_error || validate_map(game->map));
 }
 
 static t_bool	validate_filename(char *file)
@@ -52,38 +74,22 @@ static t_bool	validate_filename(char *file)
 	return (SUCCESS);
 }
 
-static t_bool	validate_map_borders(t_tab map)
+static t_bool	check_for_open_border(t_tab map, int row, int col)
 {
-	int	row;
-	int	col;
-
-	row = -1;
-	while (++row < (int)map.rows)
+	if (!row || !col || row == (int)map.rows - 1 || col == (int)map.cols - 1)
 	{
-		col = -1;
-		while (++col < (int)map.cols)
-		{
-			if (!row || !col || row == (int)map.rows - 1 || col == (int)map.cols - 1)
-			{
-				if (!ft_str_charcount("1 ", ((char **)map.tab)[row][col]))
-					return (FAILURE);
-			}
-			else if (((char **)map.tab)[row][col] == ' '
-				&& check_for_open_border((char **)map.tab, row, col))
-				return (FAILURE);
-		}
+		if (!ft_str_charcount("1 ", ((char **)map.tab)[row][col]))
+			return (FAILURE);
 	}
+	else if (((char **)map.tab)[row][col] == ' '
+		&& (!ft_str_charcount(" 1", ((char **)map.tab)[row - 1][col -1])
+		|| !ft_str_charcount(" 1", ((char **)map.tab)[row - 1][col])
+		|| !ft_str_charcount(" 1", ((char **)map.tab)[row - 1][col + 1])
+		|| !ft_str_charcount(" 1", ((char **)map.tab)[row][col - 1])
+		|| !ft_str_charcount(" 1", ((char **)map.tab)[row][col + 1])
+		|| !ft_str_charcount(" 1", ((char **)map.tab)[row + 1][col - 1])
+		|| !ft_str_charcount(" 1", ((char **)map.tab)[row + 1][col])
+		|| !ft_str_charcount(" 1", ((char **)map.tab)[row + 1][col + 1])))
+		return (FAILURE);
 	return (SUCCESS);
-}
-
-static t_bool	check_for_open_border(char **map, int row, int col)
-{
-	return (!ft_str_charcount(" 1", map[row - 1][col -1])
-		|| !ft_str_charcount(" 1", map[row - 1][col])
-		|| !ft_str_charcount(" 1", map[row - 1][col + 1])
-		|| !ft_str_charcount(" 1", map[row][col - 1])
-		|| !ft_str_charcount(" 1", map[row][col + 1])
-		|| !ft_str_charcount(" 1", map[row + 1][col - 1])
-		|| !ft_str_charcount(" 1", map[row + 1][col])
-		|| !ft_str_charcount(" 1", map[row + 1][col + 1]));
 }
