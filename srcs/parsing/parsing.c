@@ -6,37 +6,15 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:54:42 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 09:27:08 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 10:53:30 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
 static t_bool	validate_filename(char *file);
+static t_bool	validate_map(t_tab map);
 static t_bool	check_for_open_border(t_tab map, int row, int col);
-
-t_bool	validate_map(t_tab map)
-{
-	int	row;
-	int	col;
-	int	player_count;
-	int	floor_count;
-
-	row = -1;
-	player_count = 0;
-	floor_count = 0;
-	while (++row < (int)map.rows)
-	{
-		player_count += ft_str_charcount(((char **)map.tab)[row], )
-		col = -1;
-		while (++col < (int)map.cols)
-		{
-			if (check_for_open_border(map, row, col))
-				return (FAILURE);
-		}
-	}
-	return (SUCCESS);
-}
 
 t_bool	parsing(t_game *game, char *file)
 {
@@ -70,6 +48,32 @@ static t_bool	validate_filename(char *file)
 
 	len = ft_strlen(file);
 	if (len < 5 || ft_strcmp((file + len - 4), ".cub"))
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+static t_bool	validate_map(t_tab map)
+{
+	int	row;
+	int	col;
+	int	player_count;
+	int	floor_count;
+
+	row = -1;
+	player_count = 0;
+	floor_count = 0;
+	while (++row < (int)map.rows)
+	{
+		col = -1;
+		while (++col < (int)map.cols)
+		{
+			player_count += ft_str_charcount(PLAYER, ((char **)map.tab)[row][col]);
+			floor_count += ft_str_charcount("0", ((char **)map.tab)[row][col]);
+			if (check_for_open_border(map, row, col))
+				return (FAILURE);
+		}
+	}
+	if (player_count != 1 || floor_count < 1)
 		return (FAILURE);
 	return (SUCCESS);
 }
