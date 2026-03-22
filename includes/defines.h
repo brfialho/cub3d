@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:46:27 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 05:03:07 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 06:43:05 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define FLOOR 1
 
 // PARSER
-# define VALID_MAP_CHARS "01\t NSEW\n"
+# define VALID_MAP_CHARS "01 NSEW\n"
 # define TYPE_COUNT TEXTURE_COUNT + COLOR_COUNT
 # define NO_COLOR 0xFFFFFFFF
 

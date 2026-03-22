@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:54:42 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 06:40:44 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 07:06:29 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,12 @@ static t_bool	validate_map_borders(t_tab map)
 		col = -1;
 		while (++col < (int)map.cols)
 		{
-			ft_printf("ROW: %d COL: %d CHAR: %c | %d\n", row, col, ((char **)map.tab)[row][col], ((char **)map.tab)[row][col]);
 			if (!row || !col || row == (int)map.rows - 1 || col == (int)map.cols - 1)
 			{
 				if (!ft_str_charcount("1 ", ((char **)map.tab)[row][col]))
 					return (FAILURE);
 			}
-			else if (ft_str_charcount(" ", ((char **)map.tab)[row][col])
+			else if (((char **)map.tab)[row][col] == ' '
 				&& check_for_open_border((char **)map.tab, row, col))
 				return (FAILURE);
 		}
