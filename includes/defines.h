@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:46:27 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/21 22:51:45 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/22 02:28:15 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 // TEXTURES
 # define TEXTURE_COUNT 4
-# define COLOUR_COUNT 2
+# define COLOR_COUNT 2
 
 # define NORTH 0
 # define SOUTH 1
@@ -37,6 +37,7 @@
 
 // Parser
 # define VALID_MAP_CHARS "01\t NSEW\n"
-# define TYPE_COUNT TEXTURE_COUNT + COLOUR_COUNT
+# define TYPE_COUNT TEXTURE_COUNT + COLOR_COUNT
+# define NO_COLOR 0xFFFFFFFF
 
 #endif
