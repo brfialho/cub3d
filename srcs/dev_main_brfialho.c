@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:31:11 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 07:14:11 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/23 18:48:19 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 		return (ft_printf("Wrong number of arguments\n"));
 	ft_bzero(&game, sizeof(t_game));
 	t_bool status = parsing(&game, argv[1]);
-	(status && ft_printf("ERROU\n")) || ft_printf("PASSOU\n");
+	status ? ft_printf("ERROU\n") : ft_printf("PASSOU\n");
 	int i = -1;
 	while (++i < 4)
 		if (game.path[i])

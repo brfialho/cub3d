@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:56:04 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 08:21:28 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/23 18:47:03 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_bool	parse_line(t_game *game, t_parser *parser)
 
 static t_bool	set_color(t_uint *color, char *color_str)
 {
-	t_uint	rgb[3];
+	int		rgb[3];
 	char	**split;
 	int		i;
 
