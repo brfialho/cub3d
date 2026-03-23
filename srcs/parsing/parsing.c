@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:54:42 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 10:53:30 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/23 19:48:05 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static t_bool	validate_map(t_tab map)
 		col = -1;
 		while (++col < (int)map.cols)
 		{
-			player_count += ft_str_charcount(PLAYER, ((char **)map.tab)[row][col]);
+			player_count += ft_str_charcount(PLAYER_CHARS, ((char **)map.tab)[row][col]);
 			floor_count += ft_str_charcount("0", ((char **)map.tab)[row][col]);
 			if (check_for_open_border(map, row, col))
 				return (FAILURE);

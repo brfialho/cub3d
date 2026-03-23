@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:46:27 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/23 18:53:13 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/23 19:50:39 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@
 # define WINDOW_CLOSE 17
 # define WINDOW_CLOSE_MASK 1l << 17
 
-// TEXTURES
+// TEXTURES AND COLORS
 # define TEXTURE_COUNT 4
 # define COLOR_COUNT 2
-
 
 # define NORTH 0
 # define SOUTH 1
@@ -38,8 +37,20 @@
 
 // PARSER
 # define VALID_MAP_CHARS "01 NSEW\n"
-# define PLAYER "NSEW"
+# define PLAYER_CHARS "NSEW"
 # define TYPE_COUNT TEXTURE_COUNT + COLOR_COUNT
 # define NO_COLOR 0xFFFFFFFF
+
+// PLAYER
+# define PLAYER_INFO_COUNT 6
+
+# define POS_X 0
+# define POS_Y 1
+
+# define DIR_X 2
+# define DIR_Y 3
+
+# define POV_X 4
+# define POV_Y 5
 
 #endif

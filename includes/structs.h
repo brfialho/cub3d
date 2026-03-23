@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:43:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/23 18:54:11 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/23 19:49:49 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_game
 	t_tab		map;
 	t_mlx		mlx;
 	char	*path[TEXTURE_COUNT];
+	double	player[PLAYER_INFO_COUNT];
 } t_game;
 
 typedef struct s_parser
