@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:46:27 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/23 19:50:39 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/23 20:13:31 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # define DIR_X 2
 # define DIR_Y 3
 
-# define POV_X 4
-# define POV_Y 5
+# define FOV_X 4
+# define FOV_Y 5
 
 #endif
