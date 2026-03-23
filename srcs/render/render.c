@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 22:25:32 by gbercaco          #+#    #+#             */
-/*   Updated: 2026/03/23 18:38:11 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/03/23 19:13:45 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ void raycast(t_game *game)
         double rayDirX = dirX + planeX * cameraX;
         double rayDirY = dirY + planeY * cameraX;
 
-        double distance = 0.1;
+        double distance = 0.01;
 
         while (1)
         {
-            distance += 0.1;
+            distance += 0.01;
 
             int x = (int)(playerX + rayDirX * distance);
             int y = (int)(playerY + rayDirY * distance);

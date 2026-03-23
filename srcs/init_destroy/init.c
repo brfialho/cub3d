@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:53:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/23 18:56:51 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/23 19:09:03 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,6 @@
 
 t_bool	init_mlx_display(t_mlx	*mlx, char **path)
 {
-	//MOCADNDO POR ENQUANTO
-	path[NORTH] = "assets/teste.xpm";
-	path[SOUTH] = "assets/teste2.xpm";
-	path[EAST] = "assets/teste3.xpm";
-	path[WEST] = "assets/teste4.xpm";
-
 	int	i;
 
 	mlx->mlx_ptr = mlx_init();

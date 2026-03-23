@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/23 15:38:02 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/03/23 19:13:26 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ int	main(int argc, char **argv)
 
 	t_game	game;
 
+	if (argc != 2)
+		return (ft_printf("Wrong number of arguments\n"));
 	ft_bzero(&game, sizeof(t_game));
+	if (parsing(&game, argv[1]))
+		destroy_game(&game);
 	if (init_mlx_display(&game.mlx, game.path))
 		destroy_game(&game);
 	mlx_hook(game.mlx.win, WINDOW_CLOSE, WINDOW_CLOSE_MASK, destroy_game, &game);
