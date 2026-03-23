@@ -30,7 +30,7 @@ endif
 
 SRC= srcs/init_destroy/destroy.c \
 	 srcs/init_destroy/init.c \
-	 srcs/render/render.c
+	 srcs/render/render.c \
 
 O_DIR= obj/
 OBJ= $(SRC:%.c=$(O_DIR)%.o)
