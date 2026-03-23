@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:43:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/21 22:42:18 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/03/23 18:54:11 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_mlx
 	void	*win;
 	void	*img;
 	void	*textures[TEXTURE_COUNT];
-	int 	colours[COLOUR_COUNT];
+	t_uint 	colors[COLOR_COUNT];
 	int		width;
 	int		height;
 
@@ -38,5 +38,14 @@ typedef struct s_game
 	t_mlx		mlx;
 	char	*path[TEXTURE_COUNT];
 } t_game;
+
+typedef struct s_parser
+{
+	t_bool		has_error;
+	t_bool		in_map;
+	int			fd;
+	char		*line;
+	char		*elements[TYPE_COUNT];
+} t_parser;
 
 #endif

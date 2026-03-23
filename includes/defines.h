@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:46:27 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/23 15:44:40 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/03/23 18:53:13 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
 
-// Game
+// GAME
 # define TITLE "Cub3d"
 
 // MLX
@@ -25,7 +25,7 @@
 
 // TEXTURES
 # define TEXTURE_COUNT 4
-# define COLOUR_COUNT 2
+# define COLOR_COUNT 2
 
 
 # define NORTH 0
@@ -35,5 +35,11 @@
 
 # define CEILING 0
 # define FLOOR 1
+
+// PARSER
+# define VALID_MAP_CHARS "01 NSEW\n"
+# define PLAYER "NSEW"
+# define TYPE_COUNT TEXTURE_COUNT + COLOR_COUNT
+# define NO_COLOR 0xFFFFFFFF
 
 #endif

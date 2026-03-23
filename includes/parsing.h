@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 16:30:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/23 18:53:25 by brfialho         ###   ########.fr       */
+/*   Created: 2026/03/22 04:52:38 by brfialho          #+#    #+#             */
+/*   Updated: 2026/03/22 04:58:40 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef PARSING_H
+# define PARSING_H
 
 # include "libft.h"
 # include "defines.h"
 # include "structs.h"
-# include "parsing.h"
-# include "mlx.h"
-# include <sys/stat.h>
-# include <fcntl.h>
 
-int		destroy_game(t_game *game);
-t_bool	init_mlx_display(t_mlx	*mlx, char **path);
-
-//render
-void	put_pixel(t_mlx *mlx, int x, int y, int color);
-void	draw_floor_and_sky(t_mlx *mlx);
-void    raycast(t_game *game);
-
+t_bool	init_parser(t_parser *parser, char *file);
+void	destroy_parser(t_parser *parser);
+t_bool	parsing(t_game *game, char *file);
+t_bool	parse_map(t_game *game, t_parser *parser);
+t_bool	parse_line(t_game *game, t_parser *parser);
 
 #endif

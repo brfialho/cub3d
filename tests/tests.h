@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   tests.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 16:30:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/23 18:53:25 by brfialho         ###   ########.fr       */
+/*   Created: 2026/03/22 07:23:13 by brfialho          #+#    #+#             */
+/*   Updated: 2026/03/22 08:00:57 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef TESTS_H
+# define TESTS_H
 
-# include "libft.h"
-# include "defines.h"
-# include "structs.h"
-# include "parsing.h"
-# include "mlx.h"
-# include <sys/stat.h>
-# include <fcntl.h>
+# include "main.h"
 
-int		destroy_game(t_game *game);
-t_bool	init_mlx_display(t_mlx	*mlx, char **path);
+# define RED "\001\033[31m\002"
+# define GREEN "\001\033[32m\002"
+# define BOLD "\001\033[1m\002"
+# define RESET "\001\033[0m\002"
+# define YELLOW "\001\033[33m\002"
 
-//render
-void	put_pixel(t_mlx *mlx, int x, int y, int color);
-void	draw_floor_and_sky(t_mlx *mlx);
-void    raycast(t_game *game);
-
+# define TEST BOLD "%d. " RESET "Testing with " YELLOW BOLD "\"%s\"\n"
+# define TEST_SUCCESS GREEN BOLD "=== SUCCESS ✅ ===\n\n" RESET
+# define TEST_FAIL RED BOLD "=== FAILURE ❌ ===\n\n" RESET
 
 #endif
