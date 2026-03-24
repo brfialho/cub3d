@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 07:28:07 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/24 00:53:33 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/24 00:57:20 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,10 +132,11 @@ int main(void)
 	tests[17] = "tests/tester_parser/invalid_maps/18_no_player_map.cub";
 	tests[18] = "tests/tester_parser/invalid_maps/19_only_walls_map.cub";
 	tests[19] = "tests/tester_parser/invalid_maps/20_more_than_one_player_map.cub";
+	tests[20] = "tests/tester_parser/invalid_maps/21_player_on_border.cub";
 
 
-	tests[20] = "tests/tester_parser/valid_maps/1_basic.cub";
-	tests[21] = "tests/tester_parser/valid_maps/2_prison_style_map.cub";
+	tests[21] = "tests/tester_parser/valid_maps/1_basic.cub";
+	tests[22] = "tests/tester_parser/valid_maps/2_prison_style_map.cub";
 
 	test_functions[0] = test_invalid;
 	test_functions[1] = test_invalid;
@@ -157,9 +158,11 @@ int main(void)
 	test_functions[17] = test_invalid;
 	test_functions[18] = test_invalid;
 	test_functions[19] = test_invalid;
+	test_functions[20] = test_invalid;
 
-	test_functions[20] = test_valid__basic;
-	test_functions[21] = test_valid__no_empty_space_map;
+
+	test_functions[21] = test_valid__basic;
+	test_functions[22] = test_valid__no_empty_space_map;
 
 	int	test_len = 0;
 	while (tests[test_len])
