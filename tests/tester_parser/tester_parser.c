@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 07:28:07 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/24 00:48:51 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/24 00:53:33 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,28 @@ t_bool	test_valid__basic(t_game *game, char *file)
 	return (SUCCESS);
 }
 
+t_bool	test_valid__no_empty_space_map(t_game *game, char *file)
+{
+	t_bool	status;
+	t_game	expected;
+
+	status = parsing(game, file);
+	if (status == FAILURE)
+		return (FAILURE);
+	char *expected_map[] =          {"111",
+									 "1N1",
+									 "111",
+									 NULL};
+	expected.map.tab = (void **)expected_map;
+	expected.path[NORTH] = "./path_to_the_north_texture";
+	expected.path[SOUTH] = "./path_to_the_south_texture";
+	expected.path[EAST] = "./path_to_the_east_texture";
+	expected.path[WEST] = "./path_to_the_west_texture";
+	if (tester_parser_cmp(game, &expected))
+		return (FAILURE);
+	return (SUCCESS);
+}
+
 t_bool	test_invalid(t_game *game, char *file)
 {
 	return (!parsing(game, file));
@@ -113,6 +135,7 @@ int main(void)
 
 
 	tests[20] = "tests/tester_parser/valid_maps/1_basic.cub";
+	tests[21] = "tests/tester_parser/valid_maps/2_prison_style_map.cub";
 
 	test_functions[0] = test_invalid;
 	test_functions[1] = test_invalid;
@@ -136,6 +159,7 @@ int main(void)
 	test_functions[19] = test_invalid;
 
 	test_functions[20] = test_valid__basic;
+	test_functions[21] = test_valid__no_empty_space_map;
 
 	int	test_len = 0;
 	while (tests[test_len])
