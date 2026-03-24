@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:30:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/24 00:04:41 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/24 00:47:24 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <fcntl.h>
 
 int		destroy_game(t_game *game);
+void	init_game(t_game *game);
 t_bool	init_mlx_display(t_mlx	*mlx, char **path);
 
 //render

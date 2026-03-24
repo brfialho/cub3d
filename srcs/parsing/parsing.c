@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:54:42 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/24 00:38:26 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/24 00:45:35 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ t_bool	parsing(t_game *game, char *file)
 	t_parser	parser;
 	t_bool		has_error;
 
-	game->mlx.colors[CEILING] = NO_COLOR;
-	game->mlx.colors[FLOOR] = NO_COLOR;
 	if (validate_filename(file) || init_parser(&parser, file))
 		return (FAILURE);
 	while (parser.line && !parser.has_error)

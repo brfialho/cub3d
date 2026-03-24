@@ -6,12 +6,19 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:53:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/23 19:09:03 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/24 00:46:16 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include <stdio.h>
+
+void	init_game(t_game *game)
+{
+	ft_bzero(game, sizeof(t_game));
+	game->mlx.colors[CEILING] = NO_COLOR;
+	game->mlx.colors[FLOOR] = NO_COLOR;
+}
 
 t_bool	init_mlx_display(t_mlx	*mlx, char **path)
 {

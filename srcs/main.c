@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/24 00:35:47 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/24 00:47:50 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (ft_printf("Wrong number of arguments\n"));
-	ft_bzero(&game, sizeof(t_game));
+	init_game(&game);
 	if (parsing(&game, argv[1]))
 		destroy_game(&game);
 	if (init_mlx_display(&game.mlx, game.path))

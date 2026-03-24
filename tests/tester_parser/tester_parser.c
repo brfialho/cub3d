@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 07:28:07 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 09:05:52 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/24 00:48:51 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ t_bool	test_invalid(t_game *game, char *file)
 int main(void)
 {
 	t_game	game;
-	ft_bzero(&game, sizeof(t_game));
 	char	*tests[100] = {NULL};
 	t_bool	(*test_functions[100])(t_game *, char *);
 
@@ -145,6 +144,7 @@ int main(void)
 	int	j;
 	while (++i < test_len)
 	{
+		init_game(&game);
 		ft_printf(TEST, i + 1, tests[i]);
 		if (test_functions[i](&game, tests[i]))
 			ft_printf(TEST_FAIL);
@@ -157,6 +157,5 @@ int main(void)
 				free(game.path[j]);
 		if (game.map.tab)
 			ft_tab_free_content(&game.map);
-		ft_bzero(&game, sizeof(t_game));
 	}
 }
