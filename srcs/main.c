@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/24 00:47:50 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/24 22:25:48 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	game_loop(t_game *game)
 {
 	if (game->key_is_pressed[ESC])
 		destroy_game(game);
+
 	//LOGIC PART
 	for (int i = 0; i < ASCII; i++)
 		if (game->key_is_pressed[i])
