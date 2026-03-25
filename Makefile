@@ -28,13 +28,13 @@ ifeq ($(findstring gustavo, $(MAKECMDGOALS)), gustavo)
 	MAIN_SRC = srcs/dev_main_gbercaco.c
 endif
 
-SRC= srcs/init_destroy/destroy.c \
-	 srcs/render/render.c \
-	 srcs/init_destroy/init.c \
+SRC= srcs/init_destroy/destroy_game.c \
+	 srcs/init_destroy/init_game.c \
 	 srcs/parsing/parsing.c \
-	 srcs/parsing/parse_map.c \
 	 srcs/parsing/parse_line.c \
-	 srcs/parsing/validation.c
+	 srcs/parsing/parse_map.c \
+	 srcs/parsing/validation.c \
+	 srcs/render/render.c
 
 O_DIR= obj/
 OBJ= $(SRC:%.c=$(O_DIR)%.o)

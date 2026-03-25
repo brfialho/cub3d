@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/25 16:22:12 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 16:38:09 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,11 @@ static int	key_press(int keycode, t_game *game);
 
 int	main(int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
-
 	t_game	game;
 
 	if (argc != 2)
 		return (ft_printf("Wrong number of arguments\n"));
-	init_game(&game);
-	if (parsing(&game, argv[1]))
-		destroy_game(&game);
-	#include <stdio.h>
-	for (int i = 0; i< 6;i++)
-		printf("Player[%d] %f\n", i, game.player[i]);
-	if (init_mlx_display(&game.mlx, game.path))
+	if (parsing(&game, argv[1]) || init_game(&game))
 		destroy_game(&game);
 	mlx_hook(game.mlx.win, KEY_PRESS, KEY_PRESS_MASK, key_press, &game);
 	mlx_hook(game.mlx.win, KEY_RELEASE, KEY_RELEASE_MASK, key_release, &game);

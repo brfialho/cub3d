@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 07:28:07 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/24 00:57:20 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 16:39:35 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ int main(void)
 	int	j;
 	while (++i < test_len)
 	{
-		init_game(&game);
+		ft_bzero(&game, sizeof(t_game));
 		ft_printf(TEST, i + 1, tests[i]);
 		if (test_functions[i](&game, tests[i]))
 			ft_printf(TEST_FAIL);
