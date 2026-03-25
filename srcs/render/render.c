@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 22:25:32 by gbercaco          #+#    #+#             */
-/*   Updated: 2026/03/23 19:48:24 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/24 23:18:10 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+#include "math.h"
 
 void put_pixel(t_mlx *mlx, int x, int y, int color)
 {
@@ -50,27 +51,8 @@ char *map[] = {
     NULL
 };
 
-void print_wall(t_mlx *mlx, int x, double distance)
-{
-    int wallHeight;
-    int wallStart;
-    int wallEnd;
-    int y;
 
-    wallHeight = (int)(WIN_HEIGHT / distance);
 
-    wallStart = (WIN_HEIGHT / 2) - (wallHeight / 2);
-    wallEnd   = (WIN_HEIGHT / 2) + (wallHeight / 2);
-
-    if (wallStart < 0)
-        wallStart = 0;
-    if (wallEnd >= WIN_HEIGHT)
-        wallEnd = WIN_HEIGHT - 1;
-
-    y = wallStart;
-    while (y++ < wallEnd)
-        put_pixel(mlx, x, y, 0x808080);
-}
 
 void raycast(t_game *game)
 {
@@ -93,21 +75,84 @@ void raycast(t_game *game)
         double rayDirX = dirX + planeX * cameraX;
         double rayDirY = dirY + planeY * cameraX;
 
-        double distance = 0.01;
+        int mapX = (int)playerX;
+        int mapY = (int)playerY;
+
+        double deltaDistX = fabs(1.0 / rayDirX);
+        double deltaDistY = fabs(1.0 / rayDirY);
+
+        double sideDistX;
+        double sideDistY;
+
+        if (rayDirX < 0)
+            sideDistX = (playerX - mapX) * deltaDistX;
+        else
+            sideDistX = (mapX + 1.0 - playerX) * deltaDistX;
+
+        if (rayDirY < 0)
+            sideDistY = (playerY - mapY) * deltaDistY;
+        else
+            sideDistY = (mapY + 1.0 - playerY) * deltaDistY;
+
+        int stepX;
+        int stepY;
+
+        if (rayDirX < 0)
+            stepX = -1;
+        else
+            stepX = 1;
+
+        if (rayDirY < 0)
+            stepY = -1;
+        else
+            stepY = 1;
+
+        int side;
 
         while (1)
         {
-            distance += 0.01;
-
-            int x = (int)(playerX + rayDirX * distance);
-            int y = (int)(playerY + rayDirY * distance);
-
-            if (y < 0 || x < 0 || map[y] == NULL || map[y][x] == '\0')
-                break;
-
-            if (map[y][x] == '1')
+            if (sideDistX < sideDistY)
             {
-                print_wall(&game->mlx, i, distance);
+                sideDistX += deltaDistX;
+                mapX += stepX;
+                side = 0;
+            }
+            else
+            {
+                sideDistY += deltaDistY;
+                mapY += stepY;
+                side = 1;
+            }
+
+            if (map[mapY][mapX] == '1')
+            {
+                int texture;
+                if (side == 0)
+                {
+                    if (stepX > 0)
+                        texture = WEST;
+                    else
+                        texture = EAST;
+                }
+                else
+                {
+                    if (stepY > 0)
+                        texture = NORTH;
+                    else
+                        texture = SOUTH;
+                }
+
+                double wallX;
+                if (side == 0)
+                    wallX = playerY + (sideDistX - deltaDistX) * rayDirY;
+                else
+                    wallX = playerX + (sideDistY - deltaDistY) * rayDirX;
+                wallX -= (int)wallX;
+
+                if (side == 0)
+                    print_wall(&game->mlx, i, sideDistX - deltaDistX, texture, wallX);
+                else
+                    print_wall(&game->mlx, i, sideDistY - deltaDistY, texture, wallX);
                 break;
             }
         }
