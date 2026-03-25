@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:46:27 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/24 00:45:25 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 15:00:31 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,8 @@
 
 // KEYS
 # define ESC 27
+
+// TIME
+# define ONE_SIXTIETH_OF_SEC 16666
 
 #endif

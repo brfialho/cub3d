@@ -6,13 +6,14 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/24 22:25:48 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 15:06:33 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
 static int	game_loop(t_game *game);
+static void	fix_timerate(struct timeval *start);
 static int	key_release(int keycode, t_game *game);
 static int	key_press(int keycode, t_game *game);
 
@@ -39,9 +40,12 @@ int	main(int argc, char **argv)
 
 static int	game_loop(t_game *game)
 {
+	struct timeval	start;
+
+	gettimeofday(&start, NULL);
 	if (game->key_is_pressed[ESC])
 		destroy_game(game);
-
+	
 	//LOGIC PART
 	for (int i = 0; i < ASCII; i++)
 		if (game->key_is_pressed[i])
@@ -52,7 +56,19 @@ static int	game_loop(t_game *game)
 	raycast(game);
 	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win, game->mlx.img, 0, 0);
 
+	fix_timerate(&start);
 	return (SUCCESS);
+}
+
+static void	fix_timerate(struct timeval *start)
+{
+	struct timeval	end;
+	long			time_passed;
+
+	gettimeofday(&end, NULL);
+	time_passed = (end.tv_sec - start->tv_sec) * 1000000 + end.tv_usec - start->tv_usec;
+	if (time_passed < ONE_SIXTIETH_OF_SEC)
+		ft_usleep(ONE_SIXTIETH_OF_SEC - time_passed);
 }
 
 static int	key_release(int keycode, t_game *game)
@@ -66,3 +82,9 @@ static int	key_press(int keycode, t_game *game)
 	game->key_is_pressed[(t_uchar)keycode] = TRUE;
 	return (0);
 }
+
+// OLHAR ESQUERDA || X = -1
+// OLHAR DIREITA || X = 1
+
+// OLHAR CIMA || Y = -1
+// OLHAR PRA BAIXO || Y = 1
