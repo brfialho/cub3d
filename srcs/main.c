@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/25 15:06:33 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 16:22:12 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ int	main(int argc, char **argv)
 	init_game(&game);
 	if (parsing(&game, argv[1]))
 		destroy_game(&game);
+	#include <stdio.h>
+	for (int i = 0; i< 6;i++)
+		printf("Player[%d] %f\n", i, game.player[i]);
 	if (init_mlx_display(&game.mlx, game.path))
 		destroy_game(&game);
 	mlx_hook(game.mlx.win, KEY_PRESS, KEY_PRESS_MASK, key_press, &game);

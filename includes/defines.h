@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:46:27 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/25 15:00:31 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 16:12:09 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define NO_COLOR 0xFFFFFFFF
 
 // PLAYER
+# define MAX_FOV 0.66
 # define PLAYER_INFO_COUNT 6
 
 # define POS_X 0

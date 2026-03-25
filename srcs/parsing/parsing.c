@@ -6,15 +6,14 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:54:42 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/24 00:45:35 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 16:23:08 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static t_bool	validate_filename(char *file);
-static t_bool	validate_map(t_tab map);
-static t_bool	check_for_open_border(t_tab map, int row, int col);
+static void	fill_player_data(double *player, int row, int col, unsigned int c);
+static void	set_player(t_tab *map, double *player);
 
 t_bool	parsing(t_game *game, char *file)
 {
@@ -35,58 +34,46 @@ t_bool	parsing(t_game *game, char *file)
 		free(parser.line);
 		parser.line = get_next_line(parser.fd);
 	}
-	has_error = parser.has_error;
+	has_error = (parser.has_error || validate_map(game->map));
 	destroy_parser(&parser);
-	return (has_error || validate_map(game->map));
+	if (!has_error)
+		set_player(&game->map, game->player);
+	return (has_error);
 }
 
-static t_bool	validate_filename(char *file)
-{
-	int	len;
-
-	len = ft_strlen(file);
-	if (len < 5 || ft_strcmp((file + len - 4), ".cub"))
-		return (FAILURE);
-	return (SUCCESS);
-}
-
-static t_bool	validate_map(t_tab map)
+static void	set_player(t_tab *map, double *player)
 {
 	int	row;
-	int	col;
-	int	player_count;
+	int col;
 
 	row = -1;
-	player_count = 0;
-	while (++row < (int)map.rows)
+	while (++row < (int)map->rows)
 	{
 		col = -1;
-		while (++col < (int)map.cols)
+		while (++col < (int)map->cols)
 		{
-			player_count += ft_str_charcount(PLAYER_CHARS, ((char **)map.tab)[row][col]);
-			if (check_for_open_border(map, row, col))
-				return (FAILURE);
+			if (ft_str_charcount(PLAYER_CHARS, ((char **)map->tab)[row][col]))
+			{
+				fill_player_data(player, row, col, ((char **)map->tab)[row][col]);
+				break;
+			}
 		}
-	}
-	return ((player_count != 1));
+	}	
 }
 
-static t_bool	check_for_open_border(t_tab map, int row, int col)
+static void	fill_player_data(double *player, int row, int col, unsigned int c)
 {
-	if (!row || !col || row == (int)map.rows - 1 || col == (int)map.cols - 1)
-	{
-		if (!ft_str_charcount("1 ", ((char **)map.tab)[row][col]))
-			return (FAILURE);
-	}
-	else if (((char **)map.tab)[row][col] == ' '
-		&& (!ft_str_charcount(" 1", ((char **)map.tab)[row - 1][col -1])
-		|| !ft_str_charcount(" 1", ((char **)map.tab)[row - 1][col])
-		|| !ft_str_charcount(" 1", ((char **)map.tab)[row - 1][col + 1])
-		|| !ft_str_charcount(" 1", ((char **)map.tab)[row][col - 1])
-		|| !ft_str_charcount(" 1", ((char **)map.tab)[row][col + 1])
-		|| !ft_str_charcount(" 1", ((char **)map.tab)[row + 1][col - 1])
-		|| !ft_str_charcount(" 1", ((char **)map.tab)[row + 1][col])
-		|| !ft_str_charcount(" 1", ((char **)map.tab)[row + 1][col + 1])))
-		return (FAILURE);
-	return (SUCCESS);
+	static const double	spawn[ASCII][4] = {
+	['N'] = {0.0, -1.0, MAX_FOV, 0.0},
+	['S'] = {0.0, 1.0, MAX_FOV, 0.0},
+	['E'] = {1.0, 0.0, 0.0, MAX_FOV},
+	['W'] = {-1.0, 0.0, 0.0, MAX_FOV}
+	};
+
+	player[POS_X] = col;
+	player[POS_Y] = row;
+	player[DIR_X] = spawn[c][0];
+	player[DIR_Y] = spawn[c][1];
+	player[FOV_X] = spawn[c][2];
+	player[FOV_Y] = spawn[c][3];
 }

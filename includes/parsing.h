@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:52:38 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 04:58:40 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 16:15:31 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ void	destroy_parser(t_parser *parser);
 t_bool	parsing(t_game *game, char *file);
 t_bool	parse_map(t_game *game, t_parser *parser);
 t_bool	parse_line(t_game *game, t_parser *parser);
+t_bool	validate_filename(char *file);
+t_bool	validate_map(t_tab map);
 
 #endif
