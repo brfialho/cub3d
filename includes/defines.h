@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:46:27 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/25 16:12:09 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 22:41:12 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # define NO_COLOR 0xFFFFFFFF
 
 // PLAYER
+# define MOVE_SPEED 0.05
+# define TURN_SPEED 0.05
 # define MAX_FOV 0.66
 # define PLAYER_INFO_COUNT 6
 
@@ -62,6 +64,8 @@
 
 // KEYS
 # define ESC 27
+# define LEFT_ARROW 81
+# define RIGHT_ARROW 83
 
 // TIME
 # define ONE_SIXTIETH_OF_SEC 16666

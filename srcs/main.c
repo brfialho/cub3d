@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/25 16:38:09 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 22:50:47 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,25 @@ int	main(int argc, char **argv)
 	mlx_loop(game.mlx.mlx_ptr);
 }
 
+void	move_player(t_game *game)
+{	
+	// double	DirX;
+	// double	DirY;
+
+	game->player[DIR_X] = 0;
+	game->player[DIR_Y] = 1;
+
+	// game->player[DIR_X] += game->key_is_pressed[65361] * (TURN_SPEED * ((DirY < 0) - (DirY >= 0)));
+	// game->player[DIR_Y] += game->key_is_pressed[65363] * (TURN_SPEED * ((DirX >= 0) - (DirX < 0)));
+	// game->player[DIR_X] -= game->key_is_pressed['a'] * (TURN_SPEED * ((game->player[DIR_Y] > 0)));
+	// game->player[DIR_Y] -= game->key_is_pressed['a'] * (TURN_SPEED * ((game->player[DIR_X] > 0)));
+
+	game->player[POS_X] += ((game->key_is_pressed['w'] * (MOVE_SPEED * game->player[DIR_X]))
+							+ (game->key_is_pressed['s'] * -1 * (MOVE_SPEED * game->player[DIR_X])));
+	game->player[POS_Y] += ((game->key_is_pressed['w'] * (MOVE_SPEED * game->player[DIR_Y]))
+							+ (game->key_is_pressed['s'] * -1 * (MOVE_SPEED * game->player[DIR_Y])));
+}
+
 static int	game_loop(t_game *game)
 {
 	struct timeval	start;
@@ -39,11 +58,15 @@ static int	game_loop(t_game *game)
 	gettimeofday(&start, NULL);
 	if (game->key_is_pressed[ESC])
 		destroy_game(game);
-	
-	//LOGIC PART
-	for (int i = 0; i < ASCII; i++)
-		if (game->key_is_pressed[i])
-			ft_printf("%c\n", i);
+
+	// LOGIC PART
+	// for (int i = 0; i < ASCII; i++)
+	// 	if (game->key_is_pressed[i])
+	// 		ft_printf("%d\n", i);
+	move_player(game);
+
+	#include <stdio.h>
+	printf("\033[3J\033[H\nPLAYER POS -> Y:%f X:%f\nDirX: %f DirY: %f\n", game->player[POS_Y], game->player[POS_X], game->player[DIR_X], game->player[DIR_Y]);
 
 	// RENDER PART
 	draw_floor_and_sky(&game->mlx);
