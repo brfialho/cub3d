@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:30:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/25 16:38:30 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 23:01:47 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "parsing.h"
 # include "mlx.h"
 # include <sys/time.h>
+# include <math.h>
 
 int		destroy_game(t_game *game);
 t_bool	init_game(t_game *game);

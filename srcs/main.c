@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/25 22:50:47 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 23:21:01 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	move_player(t_game *game)
 	// double	DirX;
 	// double	DirY;
 
-	game->player[DIR_X] = 0;
-	game->player[DIR_Y] = 1;
+	game->player[DIR_X] = 0.9;
+	game->player[DIR_Y] = 0.1;
 
 	// game->player[DIR_X] += game->key_is_pressed[65361] * (TURN_SPEED * ((DirY < 0) - (DirY >= 0)));
 	// game->player[DIR_Y] += game->key_is_pressed[65363] * (TURN_SPEED * ((DirX >= 0) - (DirX < 0)));
@@ -46,9 +46,19 @@ void	move_player(t_game *game)
 	// game->player[DIR_Y] -= game->key_is_pressed['a'] * (TURN_SPEED * ((game->player[DIR_X] > 0)));
 
 	game->player[POS_X] += ((game->key_is_pressed['w'] * (MOVE_SPEED * game->player[DIR_X]))
-							+ (game->key_is_pressed['s'] * -1 * (MOVE_SPEED * game->player[DIR_X])));
+							+ (game->key_is_pressed['s'] * -1 * (MOVE_SPEED * game->player[DIR_X]))
+							+ ((game->key_is_pressed['d']) * (
+								((game->player[DIR_X] > 0) * (game->player[DIR_Y] < 0) * MOVE_SPEED * fabs(game->player[DIR_Y]))
+								+ ((game->player[DIR_X] > 0) * (game->player[DIR_Y] > 0) * MOVE_SPEED * game->player[DIR_Y] * -1)
+							))
+							);
 	game->player[POS_Y] += ((game->key_is_pressed['w'] * (MOVE_SPEED * game->player[DIR_Y]))
-							+ (game->key_is_pressed['s'] * -1 * (MOVE_SPEED * game->player[DIR_Y])));
+							+ (game->key_is_pressed['s'] * -1 * (MOVE_SPEED * game->player[DIR_Y]))
+							+ ((game->key_is_pressed['d']) * (
+								((game->player[DIR_X] > 0) * (game->player[DIR_Y] < 0) * MOVE_SPEED * fabs(game->player[DIR_X]))
+								+ ((game->player[DIR_X] > 0) * (game->player[DIR_Y] > 0) * MOVE_SPEED * game->player[DIR_X])
+							))
+							);
 }
 
 static int	game_loop(t_game *game)
