@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/25 23:27:23 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 23:36:14 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	move_player(t_game *game)
 	// double	DirX;
 	// double	DirY;
 
-	game->player[DIR_X] = 0;
-	game->player[DIR_Y] = -0.1;
+	game->player[DIR_X] = 1;
+	game->player[DIR_Y] = 0;
 
 	// game->player[DIR_X] += game->key_is_pressed[65361] * (TURN_SPEED * ((DirY < 0) - (DirY >= 0)));
 	// game->player[DIR_Y] += game->key_is_pressed[65363] * (TURN_SPEED * ((DirX >= 0) - (DirX < 0)));
@@ -52,6 +52,8 @@ void	move_player(t_game *game)
 								+ ((game->player[DIR_X] > 0) * (game->player[DIR_Y] > 0) * MOVE_SPEED * game->player[DIR_Y] * -1)
 								+ ((game->player[DIR_X] < 0) * (game->player[DIR_Y] > 0) * MOVE_SPEED * game->player[DIR_Y] * -1)
 								+ ((game->player[DIR_X] < 0) * (game->player[DIR_Y] < 0) * MOVE_SPEED * game->player[DIR_Y] * -1)
+								+ ((game->player[DIR_Y] < 0) * MOVE_SPEED * game->player[DIR_Y] * -1)
+								+ ((game->player[DIR_Y] > 0) * MOVE_SPEED * game->player[DIR_Y] * -1)
 							))
 							);
 	game->player[POS_Y] += ((game->key_is_pressed['w'] * (MOVE_SPEED * game->player[DIR_Y]))
@@ -61,6 +63,8 @@ void	move_player(t_game *game)
 								+ ((game->player[DIR_X] > 0) * (game->player[DIR_Y] > 0) * MOVE_SPEED * game->player[DIR_X])
 								+ ((game->player[DIR_X] < 0) * (game->player[DIR_Y] > 0) * MOVE_SPEED * game->player[DIR_X])
 								+ ((game->player[DIR_X] < 0) * (game->player[DIR_Y] < 0) * MOVE_SPEED * game->player[DIR_X])
+								+ ((game->player[DIR_X] < 0) * MOVE_SPEED * game->player[DIR_X])
+								+ ((game->player[DIR_X] > 0) * MOVE_SPEED * game->player[DIR_X])
 							))
 							);
 }
