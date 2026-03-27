@@ -6,7 +6,7 @@
 /*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:30:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/27 18:57:22 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/03/27 20:02:52 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int     return_pixel(t_mlx *mlx, int x, int y, int texuture);
 void	draw_floor_and_sky(t_mlx *mlx);
 void    print_wall(t_mlx *mlx , double distance, int x, double wallX, int texture);
 void    raycast(t_game *game);
-
+int     get_texture(int side, int step_x, int step_y);
 
 #endif
