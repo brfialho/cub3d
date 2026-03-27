@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:43:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/23 23:57:44 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/24 18:01:12 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,24 @@ typedef struct s_mlx
 	void	*mlx_ptr;
 	void	*win;
 	void	*img;
-	void	*textures[TEXTURE_COUNT];
 	t_uint 	colors[COLOR_COUNT];
 	int		width;
 	int		height;
-
+	
 	//image data
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	
+	// texture data
+	void	*textures[TEXTURE_COUNT];
+	char    *tex_addr[TEXTURE_COUNT];
+	int     tex_bpp[TEXTURE_COUNT];
+	int     tex_line[TEXTURE_COUNT];
+	int     tex_width[TEXTURE_COUNT];
+	int     tex_height[TEXTURE_COUNT];
+	int     tex_endian[TEXTURE_COUNT];
 } t_mlx;
 
 typedef struct s_game

@@ -34,7 +34,9 @@ SRC= srcs/init_destroy/destroy_game.c \
 	 srcs/parsing/parse_line.c \
 	 srcs/parsing/parse_map.c \
 	 srcs/parsing/validation.c \
-	 srcs/render/render.c
+	 srcs/render/render.c \
+	 srcs/render/raycast.c \
+	 srcs/render/raycast_utils.c \
 
 O_DIR= obj/
 OBJ= $(SRC:%.c=$(O_DIR)%.o)

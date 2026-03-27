@@ -3,113 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 22:25:32 by gbercaco          #+#    #+#             */
-/*   Updated: 2026/03/23 19:48:24 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 22:14:37 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void put_pixel(t_mlx *mlx, int x, int y, int color)
+void	put_pixel(t_mlx *mlx, int x, int y, int color)
 {
-    char *dst = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
-    *(unsigned int *)dst = color;
+	char	*dst;
+
+	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }
 
-void draw_floor_and_sky(t_mlx *mlx)
+int	return_pixel(t_mlx *mlx, int x, int y, int texuture)
 {
-    int y;
-    int x;
+	char	*dst;
 
-    y = -1;
-    while (++y < WIN_HEIGHT / 2)
-    {
-        x = -1;
-        while (++x < WIN_WIDTH)
-            put_pixel(mlx, x, y, 0xADD8E6);
-    }
-
-    while (y < WIN_HEIGHT)
-    {
-        x = -1;
-        while (++x < WIN_WIDTH)
-            put_pixel(mlx, x, y, 0x8B4513);
-        y++;
-    }
+	dst = mlx->tex_addr[texuture] + (y * mlx->tex_line[texuture]
+			+ x * (mlx->tex_bpp[texuture] / 8));
+	return (*(unsigned int *)dst);
 }
 
-//TESTE
-char *map[] = {
-    "111111",
-    "100001",
-    "100001",
-    "100001",
-    "111111",
-    NULL
-};
-
-void print_wall(t_mlx *mlx, int x, double distance)
+void	draw_floor_and_sky(t_mlx *mlx)
 {
-    int wallHeight;
-    int wallStart;
-    int wallEnd;
-    int y;
+	int	y;
+	int	x;
 
-    wallHeight = (int)(WIN_HEIGHT / distance);
-
-    wallStart = (WIN_HEIGHT / 2) - (wallHeight / 2);
-    wallEnd   = (WIN_HEIGHT / 2) + (wallHeight / 2);
-
-    if (wallStart < 0)
-        wallStart = 0;
-    if (wallEnd >= WIN_HEIGHT)
-        wallEnd = WIN_HEIGHT - 1;
-
-    y = wallStart;
-    while (y++ < wallEnd)
-        put_pixel(mlx, x, y, 0x808080);
+	y = -1;
+	while (++y < WIN_HEIGHT / 2)
+	{
+		x = -1;
+		while (++x < WIN_WIDTH)
+			put_pixel(mlx, x, y, 0xADD8E6);
+	}
+	while (y < WIN_HEIGHT)
+	{
+		x = -1;
+		while (++x < WIN_WIDTH)
+			put_pixel(mlx, x, y, 0x8B4513);
+		y++;
+	}
 }
 
-void raycast(t_game *game)
-{
-    double playerX = 2.0;
-    double playerY = 2.0;
+void	print_wall(t_mlx *mlx, double distance, int x,
+							double wall_x, int texture)
+							{
+	int	y;
+	int	colum_height;
+	int	start_colum;
+	int	end_colum;
+	int	text_x;
+	int	tex_y;
+	int	tex_pixel;
 
-    double dirX = 1.0;
-    double dirY = 0.0;
-
-    double planeX = 0.0;
-    double planeY = 0.66;
-
-    int i;
-    
-    i = -1;
-    while (++i < WIN_WIDTH)
-    {
-        double cameraX = 2 * i / (double)WIN_WIDTH - 1;
-
-        double rayDirX = dirX + planeX * cameraX;
-        double rayDirY = dirY + planeY * cameraX;
-
-        double distance = 0.01;
-
-        while (1)
-        {
-            distance += 0.01;
-
-            int x = (int)(playerX + rayDirX * distance);
-            int y = (int)(playerY + rayDirY * distance);
-
-            if (y < 0 || x < 0 || map[y] == NULL || map[y][x] == '\0')
-                break;
-
-            if (map[y][x] == '1')
-            {
-                print_wall(&game->mlx, i, distance);
-                break;
-            }
-        }
-    }
+	colum_height = (int)(WIN_HEIGHT / distance);
+	start_colum = (WIN_HEIGHT - colum_height) / 2;
+	end_colum = start_colum + colum_height;
+	text_x = wall_x * mlx->tex_width[texture];
+	if (start_colum < 0)
+		start_colum = 0;
+	if (end_colum > WIN_HEIGHT - 1)
+		end_colum = WIN_HEIGHT - 1;
+	y = start_colum;
+	while (y < end_colum)
+	{
+		tex_y = (y - start_colum) * mlx->tex_height[texture] / colum_height;
+		tex_pixel = return_pixel(mlx, text_x, tex_y, texture);
+		put_pixel(mlx, x, y, tex_pixel);
+		y++;
+	}
 }

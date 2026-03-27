@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:53:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/25 16:41:46 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/27 18:57:10 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,20 @@ static t_bool	init_mlx_display(t_mlx	*mlx, char **path)
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
 		return (FAILURE);
-	mlx->textures[NORTH] = mlx_xpm_file_to_image(mlx->mlx_ptr, path[NORTH], &mlx->width, &mlx->height);
-	mlx->textures[SOUTH] = mlx_xpm_file_to_image(mlx->mlx_ptr, path[SOUTH], &mlx->width, &mlx->height);
-	mlx->textures[EAST] = mlx_xpm_file_to_image(mlx->mlx_ptr, path[EAST], &mlx->width, &mlx->height);
-	mlx->textures[WEST] = mlx_xpm_file_to_image(mlx->mlx_ptr, path[WEST], &mlx->width, &mlx->height);
+	mlx->textures[NORTH] = mlx_xpm_file_to_image(mlx->mlx_ptr, path[NORTH], &mlx->tex_width[NORTH], &mlx->tex_height[NORTH]);
+	mlx->textures[SOUTH] = mlx_xpm_file_to_image(mlx->mlx_ptr, path[SOUTH], &mlx->tex_width[SOUTH], &mlx->tex_height[SOUTH]);
+	mlx->textures[EAST]  = mlx_xpm_file_to_image(mlx->mlx_ptr, path[EAST],  &mlx->tex_width[EAST],  &mlx->tex_height[EAST]);
+	mlx->textures[WEST]  = mlx_xpm_file_to_image(mlx->mlx_ptr, path[WEST],  &mlx->tex_width[WEST],  &mlx->tex_height[WEST]);
 	i = -1;
 	while (++i < TEXTURE_COUNT)
+	{
 		if (!mlx->textures[i])
 			return (FAILURE);
+		mlx->tex_addr[i] = mlx_get_data_addr(mlx->textures[i], &mlx->tex_bpp[i], &mlx->tex_line[i], &mlx->tex_endian[i]);
+		if (!mlx->tex_addr[i])
+			return (FAILURE);
+	}
+		
 	mlx->win = mlx_new_window(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, TITLE);
 	mlx->img = mlx_new_image(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	if (!mlx->win || !mlx->img)
