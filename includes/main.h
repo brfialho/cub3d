@@ -6,7 +6,7 @@
 /*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:30:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/25 19:26:44 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/03/27 18:57:22 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,10 @@
 # include "structs.h"
 # include "parsing.h"
 # include "mlx.h"
-# include <sys/stat.h>
 # include <sys/time.h>
-# include <fcntl.h>
 
 int		destroy_game(t_game *game);
-void	init_game(t_game *game);
-t_bool	init_mlx_display(t_mlx	*mlx, char **path);
+t_bool	init_game(t_game *game);
 
 //render
 void	put_pixel(t_mlx *mlx, int x, int y, int color);

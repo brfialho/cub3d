@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:52:38 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 04:58:40 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 16:36:53 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 # include "libft.h"
 # include "defines.h"
 # include "structs.h"
+# include <sys/stat.h>
+# include <fcntl.h>
 
-t_bool	init_parser(t_parser *parser, char *file);
-void	destroy_parser(t_parser *parser);
 t_bool	parsing(t_game *game, char *file);
 t_bool	parse_map(t_game *game, t_parser *parser);
 t_bool	parse_line(t_game *game, t_parser *parser);
+t_bool	validate_filename(char *file);
+t_bool	validate_map(t_tab map);
 
 #endif

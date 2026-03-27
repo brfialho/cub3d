@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:53:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/24 18:11:52 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/03/27 18:57:10 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-#include <stdio.h>
 
-void	init_game(t_game *game)
+static t_bool	init_mlx_display(t_mlx	*mlx, char **path);
+static void		set_player(t_tab *map, double *player);
+static void		fill_player_data(double *player, int row, int col, unsigned int c);
+
+t_bool	init_game(t_game *game)
 {
-	ft_bzero(game, sizeof(t_game));
-	game->mlx.colors[CEILING] = NO_COLOR;
-	game->mlx.colors[FLOOR] = NO_COLOR;
+	set_player(&game->map, game->player);
+	if (init_mlx_display(&game->mlx, game->path))
+		return (destroy_game(game), EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
-t_bool	init_mlx_display(t_mlx	*mlx, char **path)
+static t_bool	init_mlx_display(t_mlx	*mlx, char **path)
 {
 	int	i;
 
@@ -51,20 +55,39 @@ t_bool	init_mlx_display(t_mlx	*mlx, char **path)
 	return (SUCCESS);
 }
 
-t_bool	init_parser(t_parser *parser, char *file)
+static void	set_player(t_tab *map, double *player)
 {
-	ft_bzero(parser, sizeof(t_parser));
-	parser->fd = open(file, O_RDONLY);
-	if (parser->fd == -1)
-		return (destroy_parser(parser), FAILURE);
-	parser->line = get_next_line(parser->fd);
-	if (!parser->line)
-		return (destroy_parser(parser), FAILURE);
-	parser->elements[NORTH] = "NO";
-	parser->elements[SOUTH] = "SO";
-	parser->elements[EAST] = "EA";
-	parser->elements[WEST] = "WE";
-	parser->elements[CEILING + 4] = "C";
-	parser->elements[FLOOR + 4] = "F";
-	return (SUCCESS);
+	int	row;
+	int col;
+
+	row = -1;
+	while (++row < (int)map->rows)
+	{
+		col = -1;
+		while (++col < (int)map->cols)
+		{
+			if (ft_str_charcount(PLAYER_CHARS, ((char **)map->tab)[row][col]))
+			{
+				fill_player_data(player, row, col, ((char **)map->tab)[row][col]);
+				break;
+			}
+		}
+	}	
+}
+
+static void	fill_player_data(double *player, int row, int col, unsigned int c)
+{
+	static const double	spawn[ASCII][4] = {
+	['N'] = {0.0, -1.0, MAX_FOV, 0.0},
+	['S'] = {0.0, 1.0, MAX_FOV, 0.0},
+	['E'] = {1.0, 0.0, 0.0, MAX_FOV},
+	['W'] = {-1.0, 0.0, 0.0, MAX_FOV}
+	};
+
+	player[POS_X] = col;
+	player[POS_Y] = row;
+	player[DIR_X] = spawn[c][0];
+	player[DIR_Y] = spawn[c][1];
+	player[FOV_X] = spawn[c][2];
+	player[FOV_Y] = spawn[c][3];
 }
