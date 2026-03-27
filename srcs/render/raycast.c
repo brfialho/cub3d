@@ -6,7 +6,7 @@
 /*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 19:24:11 by gbercaco          #+#    #+#             */
-/*   Updated: 2026/03/25 22:13:58 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/03/27 17:55:20 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*map[] = {
 
 void	raycast(t_game *game)
 {
-	int	i;
+	int		i;
 	double	player_x;
 	double	player_y;
 	double	dir_x;
@@ -38,11 +38,10 @@ void	raycast(t_game *game)
 	dir_y = 0.0;
 	plane_x = 0.0;
 	plane_y = 0.66;
-
 	i = -1;
 	while (++i < WIN_WIDTH)
 	{
-		double camera_x = 2 * i / (double)WIN_WIDTH - 1;
+		double	camera_x = 2 * i / (double)WIN_WIDTH - 1;
 		double	ray_dir_x = dir_x + plane_x * camera_x;
 		double	ray_dir_y = dir_y + plane_y * camera_x;
 		int	map_x = (int)player_x;
