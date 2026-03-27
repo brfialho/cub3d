@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:30:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/24 00:47:24 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/25 19:26:44 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ t_bool	init_mlx_display(t_mlx	*mlx, char **path);
 
 //render
 void	put_pixel(t_mlx *mlx, int x, int y, int color);
+int     return_pixel(t_mlx *mlx, int x, int y, int texuture);
 void	draw_floor_and_sky(t_mlx *mlx);
+void    print_wall(t_mlx *mlx , double distance, int x, double wallX, int texture);
 void    raycast(t_game *game);
 
 

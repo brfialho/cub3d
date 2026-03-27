@@ -30,6 +30,8 @@ endif
 
 SRC= srcs/init_destroy/destroy.c \
 	 srcs/render/render.c \
+	 srcs/render/raycast.c \
+	 srcs/render/raycast_utils.c \
 	 srcs/init_destroy/init.c \
 	 srcs/parsing/parsing.c \
 	 srcs/parsing/parse_map.c \
