@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:46:27 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/25 22:41:12 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/27 19:50:21 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 
 // PLAYER
 # define MOVE_SPEED 0.05
-# define TURN_SPEED 0.05
+# define TURN_SPEED 0.025
 # define MAX_FOV 0.66
 # define PLAYER_INFO_COUNT 6
 

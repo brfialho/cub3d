@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/26 00:09:12 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/27 20:08:37 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,27 @@ int	main(int argc, char **argv)
 
 void	move_player(t_game *game)
 {	
-	// double	DirX;
-	// double	DirY;
+	static int init = 0;
+	if (!init)
+	{
+		game->player[DIR_X] = 0.0;
+		game->player[DIR_Y] = -1;
+		init = 1;
+	}
 
-	game->player[DIR_X] = -1;
-	game->player[DIR_Y] = 0;
+	double	DirX = game->player[DIR_X];
+	double	DirY = game->player[DIR_Y];
+	double 	FovX = game->player[FOV_X];
+	double	FovY = game->player[FOV_Y];
+	double angle = (game->key_is_pressed[LEFT_ARROW] * -TURN_SPEED)
+					+ game->key_is_pressed[RIGHT_ARROW] * TURN_SPEED;
+	game->player[DIR_X] = (angle != 0) * (DirX * cos(angle) - DirY * sin(angle)) +
+							(angle == 0) * (DirX);
+	game->player[DIR_Y] = (angle != 0) * (DirX * sin(angle) + DirY * cos(angle)) +
+							(angle == 0) * (DirY);
+	game->player[FOV_X] = FovX * cos(angle) -FovY * sin(angle);
+	game->player[FOV_Y] = FovX * sin(angle) + FovY * cos(angle);
 
-	// game->player[DIR_X] += game->key_is_pressed[65361] * (TURN_SPEED * ((DirY < 0) - (DirY >= 0)));
-	// game->player[DIR_Y] += game->key_is_pressed[65363] * (TURN_SPEED * ((DirX >= 0) - (DirX < 0)));
-	// game->player[DIR_X] -= game->key_is_pressed['a'] * (TURN_SPEED * ((game->player[DIR_Y] > 0)));
-	// game->player[DIR_Y] -= game->key_is_pressed['a'] * (TURN_SPEED * ((game->player[DIR_X] > 0)));
 
 	game->player[POS_X] += ((game->key_is_pressed['w'] * (MOVE_SPEED * game->player[DIR_X]))
 							+ (game->key_is_pressed['s'] * -1 * (MOVE_SPEED * game->player[DIR_X]))
@@ -93,16 +104,12 @@ static int	game_loop(t_game *game)
 	if (game->key_is_pressed[ESC])
 		destroy_game(game);
 
-	// LOGIC PART
+	move_player(game);
 	// for (int i = 0; i < ASCII; i++)
 	// 	if (game->key_is_pressed[i])
-	// 		ft_printf("%d\n", i);
-	move_player(game);
-
-	#include <stdio.h>
-	printf("\033[3J\033[H\nPLAYER POS -> Y:%f X:%f\nDirX: %f DirY: %f\n", game->player[POS_Y], game->player[POS_X], game->player[DIR_X], game->player[DIR_Y]);
-
-	// RENDER PART
+	// 		ft_printf("%c\n", i);
+	// #include <stdio.h>
+	// printf("\033[3J\033[H\nPLAYER POS -> Y:%f X:%f\nDirX: %f DirY: %f\n", game->player[POS_Y], game->player[POS_X], game->player[DIR_X], game->player[DIR_Y]);
 	draw_floor_and_sky(&game->mlx);
 	raycast(game);
 	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win, game->mlx.img, 0, 0);
