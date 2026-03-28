@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:43:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/24 18:01:12 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/03/28 02:54:55 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ typedef struct s_mlx
 	
 	//image data
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
+	int		bpp;
+	int		line_len;
 	int		endian;
 	
 	// texture data

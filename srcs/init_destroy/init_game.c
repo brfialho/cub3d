@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:53:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/27 18:57:10 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/03/28 02:59:30 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static t_bool	init_mlx_display(t_mlx	*mlx, char **path);
 static void		set_player(t_tab *map, double *player);
-static void		fill_player_data(double *player, int row, int col, unsigned int c);
+static void		fill_player_data(double *player, int row, int col,
+					unsigned int c);
 
 t_bool	init_game(t_game *game)
 {
@@ -31,34 +32,30 @@ static t_bool	init_mlx_display(t_mlx	*mlx, char **path)
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
 		return (FAILURE);
-	mlx->textures[NORTH] = mlx_xpm_file_to_image(mlx->mlx_ptr, path[NORTH], &mlx->tex_width[NORTH], &mlx->tex_height[NORTH]);
-	mlx->textures[SOUTH] = mlx_xpm_file_to_image(mlx->mlx_ptr, path[SOUTH], &mlx->tex_width[SOUTH], &mlx->tex_height[SOUTH]);
-	mlx->textures[EAST]  = mlx_xpm_file_to_image(mlx->mlx_ptr, path[EAST],  &mlx->tex_width[EAST],  &mlx->tex_height[EAST]);
-	mlx->textures[WEST]  = mlx_xpm_file_to_image(mlx->mlx_ptr, path[WEST],  &mlx->tex_width[WEST],  &mlx->tex_height[WEST]);
 	i = -1;
 	while (++i < TEXTURE_COUNT)
 	{
+		mlx->textures[i] = mlx_xpm_file_to_image(mlx->mlx_ptr, path[i],
+				&mlx->tex_width[i], &mlx->tex_height[i]);
 		if (!mlx->textures[i])
 			return (FAILURE);
-		mlx->tex_addr[i] = mlx_get_data_addr(mlx->textures[i], &mlx->tex_bpp[i], &mlx->tex_line[i], &mlx->tex_endian[i]);
+		mlx->tex_addr[i] = mlx_get_data_addr(mlx->textures[i], &mlx->tex_bpp[i],
+				&mlx->tex_line[i], &mlx->tex_endian[i]);
 		if (!mlx->tex_addr[i])
 			return (FAILURE);
 	}
-		
 	mlx->win = mlx_new_window(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, TITLE);
 	mlx->img = mlx_new_image(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	if (!mlx->win || !mlx->img)
 		return (FAILURE);
-	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, &mlx->line_length, &mlx->endian);
-	if (!mlx->addr)
-		return (FAILURE);
-	return (SUCCESS);
+	return (!(mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bpp,
+				&mlx->line_len, &mlx->endian)));
 }
 
 static void	set_player(t_tab *map, double *player)
 {
 	int	row;
-	int col;
+	int	col;
 
 	row = -1;
 	while (++row < (int)map->rows)
@@ -68,8 +65,9 @@ static void	set_player(t_tab *map, double *player)
 		{
 			if (ft_str_charcount(PLAYER_CHARS, ((char **)map->tab)[row][col]))
 			{
-				fill_player_data(player, row, col, ((char **)map->tab)[row][col]);
-				break;
+				fill_player_data(player, row, col,
+					((char **)map->tab)[row][col]);
+				break ;
 			}
 		}
 	}	

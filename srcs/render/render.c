@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 22:25:32 by gbercaco          #+#    #+#             */
-/*   Updated: 2026/03/25 22:14:37 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/03/28 02:56:29 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	put_pixel(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
+	dst = mlx->addr + (y * mlx->line_len + x * (mlx->bpp / 8));
 	*(unsigned int *)dst = color;
 }
 
