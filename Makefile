@@ -37,6 +37,7 @@ SRC= srcs/init_destroy/destroy_game.c \
 	 srcs/render/render.c \
 	 srcs/render/raycast.c \
 	 srcs/render/raycast_utils.c \
+	 srcs/move_player.c \
 
 O_DIR= obj/
 OBJ= $(SRC:%.c=$(O_DIR)%.o)

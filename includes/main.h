@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:30:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/27 20:14:24 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/27 23:43:01 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	draw_floor_and_sky(t_mlx *mlx);
 void    print_wall(t_mlx *mlx , double distance, int x, double wallX, int texture);
 void    raycast(t_game *game);
 int     get_texture(int side, int step_x, int step_y);
+void	move_player(t_game *game);
 
 #endif
