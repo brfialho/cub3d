@@ -20,14 +20,6 @@ CC= cc -Werror -Wextra -Wall $(INCLUDES)
 
 MAIN_SRC= srcs/main.c
 
-ifeq ($(findstring bruno, $(MAKECMDGOALS)), bruno)
-	MAIN_SRC = srcs/dev_main_brfialho.c
-endif
-
-ifeq ($(findstring gustavo, $(MAKECMDGOALS)), gustavo)
-	MAIN_SRC = srcs/dev_main_gbercaco.c
-endif
-
 SRC= srcs/init_destroy/destroy_game.c \
 	 srcs/init_destroy/init_game.c \
 	 srcs/parsing/parsing.c \
@@ -58,10 +50,6 @@ TEST_BINARIES= $(addprefix $(TEST_BIN_DIR), $(TEST_NAMES))
 VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes
 
 all: $(LIBFT) $(LIBMLX) $(NAME)
-
-bruno: re_nolib
-
-gustavo: re_nolib
 
 $(NAME): $(OBJ) $(MAIN_OBJ)
 	@$(CC) $(OBJ) $(MAIN_OBJ) $(LIBFT) $(LIBMLX) $(DEPENDENCIES) -o $(NAME)
@@ -131,4 +119,4 @@ test: fclean_nolib
 	done
 	@rm -rf $(TEST_BIN_DIR)
 
-.PHONY: $(LIBFT) all re fclean clean bruno gustavo re_nolib fclean_nolib test
+.PHONY: $(LIBFT) all re fclean clean re_nolib fclean_nolib test

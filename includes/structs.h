@@ -6,14 +6,14 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:43:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/28 02:54:55 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/28 03:07:26 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-#include "libft.h"
+# include "libft.h"
 
 typedef struct s_mlx
 {

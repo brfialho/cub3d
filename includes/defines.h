@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:46:27 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/27 19:50:21 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/28 03:09:16 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,8 @@
 # define WIN_HEIGHT 768
 
 # define WINDOW_CLOSE 17
-# define WINDOW_CLOSE_MASK 1l << 17
-
 # define KEY_PRESS 2
-# define KEY_PRESS_MASK 1L << 0
-
 # define KEY_RELEASE 3
-# define KEY_RELEASE_MASK 1L << 1
 
 // TEXTURES AND COLORS
 # define TEXTURE_COUNT 4
@@ -44,7 +39,8 @@
 // PARSER
 # define VALID_MAP_CHARS "01 NSEW\n"
 # define PLAYER_CHARS "NSEW"
-# define TYPE_COUNT TEXTURE_COUNT + COLOR_COUNT
+// Type count is TEXTURE_COUNT + COLOR_COUNT
+# define TYPE_COUNT 4 + 2
 # define NO_COLOR 0xFFFFFFFF
 
 // PLAYER

@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/28 02:43:54 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/28 03:06:57 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	main(int argc, char **argv)
 		return (ft_printf("Wrong number of arguments\n"));
 	if (parsing(&game, argv[1]) || init_game(&game))
 		destroy_game(&game);
-	mlx_hook(game.mlx.win, KEY_PRESS, KEY_PRESS_MASK, key_press, &game);
-	mlx_hook(game.mlx.win, KEY_RELEASE, KEY_RELEASE_MASK, key_release, &game);
-	mlx_hook(game.mlx.win, WINDOW_CLOSE, WINDOW_CLOSE_MASK, destroy_game, &game);
+	mlx_hook(game.mlx.win, KEY_PRESS, 1L << 0, key_press, &game);
+	mlx_hook(game.mlx.win, KEY_RELEASE, 1L << 1, key_release, &game);
+	mlx_hook(game.mlx.win, WINDOW_CLOSE, 1l << 17, destroy_game, &game);
 	mlx_loop_hook(game.mlx.mlx_ptr, game_loop, &game);
 	mlx_loop(game.mlx.mlx_ptr);
 }
@@ -57,7 +57,8 @@ static void	fix_timerate(struct timeval *start)
 	long			time_passed;
 
 	gettimeofday(&end, NULL);
-	time_passed = (end.tv_sec - start->tv_sec) * 1000000 + end.tv_usec - start->tv_usec;
+	time_passed = (end.tv_sec - start->tv_sec) * 1000000
+		+ end.tv_usec - start->tv_usec;
 	if (time_passed < ONE_SIXTIETH_OF_SEC)
 		ft_usleep(ONE_SIXTIETH_OF_SEC - time_passed);
 }
