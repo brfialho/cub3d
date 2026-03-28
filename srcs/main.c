@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/27 22:15:13 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/27 23:20:19 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,9 @@ int	main(int argc, char **argv)
 	mlx_loop(game.mlx.mlx_ptr);
 }
 
-#define OLD_X game->player[POS_X]
-#define OLD_Y game->player[POS_Y]
-
 void	move_player(t_game *game)
 {	
-	static int init = 0;
-	if (!init)
-	{
-		game->player[DIR_X] = 0.0;
-		game->player[DIR_Y] = -1;
-		init = 1;
-	}
-	t_bool	found_wall;
+	t_bool found_wall;
 	double	pX = game->player[POS_X];
 	double	pY = game->player[POS_Y];
 	double	DirX = game->player[DIR_X];
@@ -99,11 +89,11 @@ void	move_player(t_game *game)
 								+ ((game->player[DIR_X] > 0) * MOVE_SPEED * game->player[DIR_X] * -1)
 							))
 							);
-	found_wall = (((char **)game->map.tab)[(int)OLD_Y][(int)pX] == '1')
-				+ (((char **)game->map.tab)[(int)OLD_Y][(int)pX] == ' ');
+	found_wall = (((char **)game->map.tab)[(int)game->player[POS_Y]][(int)pX] == '1')
+				+ (((char **)game->map.tab)[(int)game->player[POS_Y]][(int)pX] == ' ');
 	game->player[POS_X] = !!found_wall * game->player[POS_X] + !found_wall * pX;
-	found_wall = (((char **)game->map.tab)[(int)pY][(int)OLD_X] == '1')
-				+ (((char **)game->map.tab)[(int)pY][(int)OLD_X] == ' ');
+	found_wall = (((char **)game->map.tab)[(int)pY][(int)game->player[POS_X]] == '1')
+				+ (((char **)game->map.tab)[(int)pY][(int)game->player[POS_X]] == ' ');
 	game->player[POS_Y] = !!found_wall * game->player[POS_Y] + !found_wall * pY;
 }
 
