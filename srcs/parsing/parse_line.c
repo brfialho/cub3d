@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:56:04 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/23 18:47:03 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/28 03:01:51 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,25 @@ t_bool	parse_line(t_game *game, t_parser *parser)
 {
 	t_bool	status;
 	char	**split;
-	int		element;
+	int		item;
 
 	if (!ft_strcmp(parser->line, "\n"))
 		return (SUCCESS);
 	split = ft_split(parser->line, ' ');
 	if (ft_split_len(split) != 2)
 		return (ft_split_free(split), FAILURE);
-	element = -1;
-	while (ft_strcmp(split[0], parser->elements[++element]))
-		if (element > TYPE_COUNT - 1)
+	item = -1;
+	while (ft_strcmp(split[0], parser->elements[++item]))
+		if (item > TYPE_COUNT - 1)
 			return (ft_split_free(split), FAILURE);
 	status = SUCCESS;
-	if (element < TEXTURE_COUNT && !game->path[element])
+	if (item < TEXTURE_COUNT && !game->path[item])
 	{
-		game->path[element] = ft_strdup(split[1]);
-		game->path[element][ft_strlen(game->path[element]) - 1] = '\0';
+		game->path[item] = ft_strdup(split[1]);
+		game->path[item][ft_strlen(game->path[item]) - 1] = '\0';
 	}
-	else if (game->mlx.colors[element - TEXTURE_COUNT] == NO_COLOR)
-		status = set_color(&game->mlx.colors[element - TEXTURE_COUNT], split[1]);
+	else if (game->mlx.colors[item - TEXTURE_COUNT] == NO_COLOR)
+		status = set_color(&game->mlx.colors[item - TEXTURE_COUNT], split[1]);
 	else
 		status = FAILURE;
 	ft_split_free(split);
