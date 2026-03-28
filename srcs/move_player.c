@@ -6,11 +6,30 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 23:36:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/28 00:10:50 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/28 00:13:20 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+static void		rotate_player(t_game *game, double angle);
+static double	move_x(char *key, double dir_x, double dir_y);
+static double	move_y(char *key, double dir_x, double dir_y);
+static void		update_player_pos(t_game *game, double new_x, double new_y);
+
+void	move_player(t_game *game)
+{
+	double	angle;
+
+	angle = (game->key_is_pressed[LEFT_ARROW] * -TURN_SPEED)
+		+ game->key_is_pressed[RIGHT_ARROW] * TURN_SPEED;
+	rotate_player(game, angle);
+	update_player_pos(game, game->player[POS_X]
+		+ move_x(game->key_is_pressed,
+			game->player[DIR_X], game->player[DIR_Y]), game->player[POS_Y]
+		+ move_y(game->key_is_pressed,
+			game->player[DIR_X], game->player[DIR_Y]));
+}
 
 static void	rotate_player(t_game *game, double angle)
 {
@@ -103,18 +122,4 @@ static void	update_player_pos(t_game *game, double new_x, double new_y)
 		+ (map[(int)new_y][(int)game->player[POS_X]] == ' ');
 	game->player[POS_Y] = !!found_wall * game->player[POS_Y]
 		+ !found_wall * new_y;
-}
-
-void	move_player(t_game *game)
-{
-	double	angle;
-
-	angle = (game->key_is_pressed[LEFT_ARROW] * -TURN_SPEED)
-		+ game->key_is_pressed[RIGHT_ARROW] * TURN_SPEED;
-	rotate_player(game, angle);
-	update_player_pos(game, game->player[POS_X]
-		+ move_x(game->key_is_pressed,
-			game->player[DIR_X], game->player[DIR_Y]), game->player[POS_Y]
-		+ move_y(game->key_is_pressed,
-			game->player[DIR_X], game->player[DIR_Y]));
 }
