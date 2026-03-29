@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 22:25:32 by gbercaco          #+#    #+#             */
-/*   Updated: 2026/03/28 02:56:29 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/29 17:32:04 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,35 @@ void	draw_floor_and_sky(t_mlx *mlx)
 	}
 }
 
-void	print_wall(t_mlx *mlx, double distance, int x,
-							double wall_x, int texture)
-							{
-	int	y;
-	int	colum_height;
-	int	start_colum;
-	int	end_colum;
-	int	text_x;
-	int	tex_y;
-	int	tex_pixel;
+static t_wall	init_wall(t_mlx *mlx, double distance,
+		double wall_x, int texture)
+{
+	t_wall	wall;
 
-	colum_height = (int)(WIN_HEIGHT / distance);
-	start_colum = (WIN_HEIGHT - colum_height) / 2;
-	end_colum = start_colum + colum_height;
-	text_x = wall_x * mlx->tex_width[texture];
-	if (start_colum < 0)
-		start_colum = 0;
-	if (end_colum > WIN_HEIGHT - 1)
-		end_colum = WIN_HEIGHT - 1;
-	y = start_colum;
-	while (y < end_colum)
+	wall.height = (int)(WIN_HEIGHT / distance);
+	wall.start = (WIN_HEIGHT - wall.height) / 2;
+	wall.end = wall.start + wall.height;
+	wall.tex_x = wall_x * mlx->tex_width[texture];
+	if (wall.start < 0)
+		wall.start = 0;
+	if (wall.end > WIN_HEIGHT - 1)
+		wall.end = WIN_HEIGHT - 1;
+	return (wall);
+}
+
+void	print_wall(t_mlx *mlx, t_wall_data *data, int x)
+{
+	t_wall	wall;
+	int		tex_y;
+	int		tex_pixel;
+	int		y;
+
+	wall = init_wall(mlx, data->distance, data->wall_x, data->texture);
+	y = wall.start;
+	while (y < wall.end)
 	{
-		tex_y = (y - start_colum) * mlx->tex_height[texture] / colum_height;
-		tex_pixel = return_pixel(mlx, text_x, tex_y, texture);
+		tex_y = (y - wall.start) * mlx->tex_height[data->texture] / wall.height;
+		tex_pixel = return_pixel(mlx, wall.tex_x, tex_y, data->texture);
 		put_pixel(mlx, x, y, tex_pixel);
 		y++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:43:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/28 03:07:26 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/03/29 17:31:52 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,36 @@ typedef struct s_game
 	char		*path[TEXTURE_COUNT];
 	double		player[PLAYER_INFO_COUNT];
 } t_game;
+
+typedef struct s_ray
+{
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+}	t_ray;
+
+typedef struct s_wall
+{
+    int	height;
+    int	start;
+    int	end;
+    int	tex_x;
+}   t_wall;
+
+typedef struct s_wall_data
+{
+    double  distance;
+    double  wall_x;
+    int     texture;
+}   t_wall_data;
 
 typedef struct s_parser
 {
