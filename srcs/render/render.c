@@ -6,7 +6,7 @@
 /*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 22:25:32 by gbercaco          #+#    #+#             */
-/*   Updated: 2026/03/29 17:32:04 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/03/29 21:08:24 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ static t_wall	init_wall(t_mlx *mlx, double distance,
 	wall.height = (int)(WIN_HEIGHT / distance);
 	wall.start = (WIN_HEIGHT - wall.height) / 2;
 	wall.end = wall.start + wall.height;
-	wall.tex_x = wall_x * mlx->tex_width[texture];
-	if (wall.start < 0)
-		wall.start = 0;
-	if (wall.end > WIN_HEIGHT - 1)
-		wall.end = WIN_HEIGHT - 1;
+	wall.tex_x = (int)(wall_x * mlx->tex_width[texture]);
+	if (wall.tex_x < 0)
+		wall.tex_x = 0;
+	if (wall.tex_x >= mlx->tex_width[texture])
+		wall.tex_x = mlx->tex_width[texture] - 1;
 	return (wall);
 }
 
@@ -72,12 +72,22 @@ void	print_wall(t_mlx *mlx, t_wall_data *data, int x)
 	int		tex_y;
 	int		tex_pixel;
 	int		y;
+	int		real_start;
 
 	wall = init_wall(mlx, data->distance, data->wall_x, data->texture);
+	real_start = wall.start;
+	if (wall.start < 0)
+		wall.start = 0;
+	if (wall.end > WIN_HEIGHT - 1)
+		wall.end = WIN_HEIGHT - 1;
 	y = wall.start;
 	while (y < wall.end)
 	{
-		tex_y = (y - wall.start) * mlx->tex_height[data->texture] / wall.height;
+		tex_y = (y - real_start) * mlx->tex_height[data->texture] / wall.height;
+		if (tex_y < 0)
+			tex_y = 0;
+		if (tex_y >= mlx->tex_height[data->texture])
+			tex_y = mlx->tex_height[data->texture] - 1;
 		tex_pixel = return_pixel(mlx, wall.tex_x, tex_y, data->texture);
 		put_pixel(mlx, x, y, tex_pixel);
 		y++;
