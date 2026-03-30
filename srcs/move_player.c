@@ -6,7 +6,7 @@
 /*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 23:36:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/29 21:04:11 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/03/29 21:30:48 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,16 +110,24 @@ static double	move_y(char *key, double dir_x, double dir_y)
 
 static void	update_player_pos(t_game *game, double new_x, double new_y)
 {
-	t_bool	found_wall;
-	char	**map;
+	t_bool		found_wall;
+	double		diff;
+	char		**map;
+	
 
+	diff = new_x - game->player[POS_X];
 	map = (char **)game->map.tab;
-	found_wall = (map[(int)game->player[POS_Y]][(int)new_x] == '1')
-		+ (map[(int)game->player[POS_Y]][(int)new_x] == ' ');
-	game->player[POS_X] = !!found_wall * game->player[POS_X]
+	found_wall = (map[(int)game->player[POS_Y]][(int)(new_x + (diff * 4))] == '1');
+	game->player[POS_X] = found_wall * game->player[POS_X]
 		+ !found_wall * new_x;
-	found_wall = (map[(int)new_y][(int)game->player[POS_X]] == '1')
-		+ (map[(int)new_y][(int)game->player[POS_X]] == ' ');
-	game->player[POS_Y] = !!found_wall * game->player[POS_Y]
+	diff = new_y - game->player[POS_Y];
+	found_wall = (map[(int)(new_y + (diff * 4))][(int)game->player[POS_X]] == '1');
+	game->player[POS_Y] = found_wall * game->player[POS_Y]
 		+ !found_wall * new_y;
 }
+
+// x = 0.8 | 0.9 | 0.9
+// y =1.5 | 1.6 | 1.7
+
+// 0.8 -> 0.9 = 0.1
+// 0.9 -> 0.8 = -0.1
