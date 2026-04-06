@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 12:52:48 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 13:24:58 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 16:02:57 by gbercaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	draw_wall(t_ray *ray, t_game *game, int i)
 			+ ray->ray_dir_y * game->player[DIR_Y]);
 	data.distance = perp_dist;
 	data.wall_x -= (int)data.wall_x;
-	if (ray->side == 0 && ray->ray_dir_x > 0)
+	if (ray->side == 0 && ray->ray_dir_x < 0)
 		data.wall_x = 1.0 - data.wall_x;
-	if (ray->side == 1 && ray->ray_dir_y < 0)
+	if (ray->side == 1 && ray->ray_dir_y > 0)
 		data.wall_x = 1.0 - data.wall_x;
 	print_wall(&game->mlx, &data, i);
 }
