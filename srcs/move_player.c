@@ -6,29 +6,33 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 23:36:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 12:34:02 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 14:13:48 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
 static void		rotate_player(t_game *game, double angle);
-static double	move_x(char *key, double dir_x, double dir_y);
-static double	move_y(char *key, double dir_x, double dir_y);
+static double	move_x(char *key, double dir_x, double dir_y, double speed);
+static double	move_y(char *key, double dir_x, double dir_y, double speed);
 static void		update_player_pos(t_game *game, double new_x, double new_y);
 
-void	move_player(t_game *game)
+void	move_player(t_game *game, long delta_t)
 {
 	double	angle;
+	double	speed;
+	double	turn_speed;
 
-	angle = (game->key_is_pressed[LEFT_ARROW] * -TURN_SPEED)
-		+ game->key_is_pressed[RIGHT_ARROW] * TURN_SPEED;
+	speed = MOVE_SPEED * ((double)delta_t / (double)ONE_SIXTIETH_OF_SEC);
+	turn_speed = TURN_SPEED * ((double)delta_t / (double)ONE_SIXTIETH_OF_SEC);
+	angle = (game->key_is_pressed[LEFT_ARROW] * -turn_speed)
+		+ game->key_is_pressed[RIGHT_ARROW] * turn_speed;
 	rotate_player(game, angle);
 	update_player_pos(game, game->player[POS_X]
 		+ move_x(game->key_is_pressed,
-			game->player[DIR_X], game->player[DIR_Y]), game->player[POS_Y]
+			game->player[DIR_X], game->player[DIR_Y], speed), game->player[POS_Y]
 		+ move_y(game->key_is_pressed,
-			game->player[DIR_X], game->player[DIR_Y]));
+			game->player[DIR_X], game->player[DIR_Y], speed));
 }
 
 static void	rotate_player(t_game *game, double angle)
@@ -50,62 +54,62 @@ static void	rotate_player(t_game *game, double angle)
 	game->player[FOV_Y] = fov_x * sin(angle) + fov_y * cos(angle);
 }
 
-static double	move_x(char *key, double dir_x, double dir_y)
+static double	move_x(char *key, double dir_x, double dir_y, double speed)
 {
-	return ((key['w'] * (MOVE_SPEED * dir_x))
-		+ (key['s'] * (-MOVE_SPEED * dir_x))
+	return ((key['w'] * (speed * dir_x))
+		+ (key['s'] * (-speed * dir_x))
 		+ ((key['d']) * (
 				((dir_x > 0) * (dir_y < 0)
-					* MOVE_SPEED * fabs(dir_y))
+					* speed * fabs(dir_y))
 				+ ((dir_x > 0) * (dir_y > 0)
-					* MOVE_SPEED * -dir_y)
+					* speed * -dir_y)
 				+ ((dir_x < 0) * (dir_y > 0)
-					* MOVE_SPEED * -dir_y)
+					* speed * -dir_y)
 				+ ((dir_x < 0) * (dir_y < 0)
-					* MOVE_SPEED * -dir_y)
-				+ ((dir_y < 0) * !dir_x * MOVE_SPEED * -dir_y)
-				+ ((dir_y > 0) * !dir_x * MOVE_SPEED * -dir_y)
+					* speed * -dir_y)
+				+ ((dir_y < 0) * !dir_x * speed * -dir_y)
+				+ ((dir_y > 0) * !dir_x * speed * -dir_y)
 			))
 		+ ((key['a']) * (
 				((dir_x > 0) * (dir_y < 0)
-					* MOVE_SPEED * dir_y)
+					* speed * dir_y)
 				+ ((dir_x > 0) * (dir_y > 0)
-					* MOVE_SPEED * dir_y)
+					* speed * dir_y)
 				+ ((dir_x < 0) * (dir_y > 0)
-					* MOVE_SPEED * dir_y)
+					* speed * dir_y)
 				+ ((dir_x < 0) * (dir_y < 0)
-					* MOVE_SPEED * dir_y)
-				+ ((dir_y < 0) * !dir_x * MOVE_SPEED * dir_y)
-				+ ((dir_y > 0) * !dir_x * MOVE_SPEED * dir_y))));
+					* speed * dir_y)
+				+ ((dir_y < 0) * !dir_x * speed * dir_y)
+				+ ((dir_y > 0) * !dir_x * speed * dir_y))));
 }
 
-static double	move_y(char *key, double dir_x, double dir_y)
+static double	move_y(char *key, double dir_x, double dir_y, double speed)
 {
-	return ((key['w'] * (MOVE_SPEED * dir_y))
-		+ (key['s'] * (-MOVE_SPEED * dir_y))
+	return ((key['w'] * (speed * dir_y))
+		+ (key['s'] * (-speed * dir_y))
 		+ ((key['d']) * (
 				((dir_x > 0) * (dir_y < 0)
-					* MOVE_SPEED * fabs(dir_x))
+					* speed * fabs(dir_x))
 				+ ((dir_x > 0) * (dir_y > 0)
-					* MOVE_SPEED * dir_x)
+					* speed * dir_x)
 				+ ((dir_x < 0) * (dir_y > 0)
-					* MOVE_SPEED * dir_x)
+					* speed * dir_x)
 				+ ((dir_x < 0) * (dir_y < 0)
-					* MOVE_SPEED * dir_x)
-				+ ((dir_x < 0) * !dir_y * MOVE_SPEED * dir_x)
-				+ ((dir_x > 0) * !dir_y * MOVE_SPEED * dir_x)
+					* speed * dir_x)
+				+ ((dir_x < 0) * !dir_y * speed * dir_x)
+				+ ((dir_x > 0) * !dir_y * speed * dir_x)
 			))
 		+ ((key['a']) * (
 				((dir_x > 0) * (dir_y < 0)
-					* MOVE_SPEED * -dir_x)
+					* speed * -dir_x)
 				+ ((dir_x > 0) * (dir_y > 0)
-					* MOVE_SPEED * -dir_x)
+					* speed * -dir_x)
 				+ ((dir_x < 0) * (dir_y > 0)
-					* MOVE_SPEED * -dir_x)
+					* speed * -dir_x)
 				+ ((dir_x < 0) * (dir_y < 0)
-					* MOVE_SPEED * -dir_x)
-				+ ((dir_x < 0) * !dir_y * MOVE_SPEED * -dir_x)
-				+ ((dir_x > 0) * !dir_y * MOVE_SPEED * -dir_x))));
+					* speed * -dir_x)
+				+ ((dir_x < 0) * !dir_y * speed * -dir_x)
+				+ ((dir_x > 0) * !dir_y * speed * -dir_x))));
 }
 
 static void	update_player_pos(t_game *game, double new_x, double new_y)
@@ -113,7 +117,6 @@ static void	update_player_pos(t_game *game, double new_x, double new_y)
 	t_bool		found_wall;
 	double		diff;
 	char		**map;
-	
 
 	diff = new_x - game->player[POS_X];
 	map = (char **)game->map.tab;
