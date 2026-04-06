@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:52:38 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 16:22:02 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 17:03:38 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_parser
 	int			fd;
 	char		*line;
 	char		*elements[TYPE_COUNT];
-} t_parser;
+}	t_parser;
 
 t_bool	parsing(t_game *game, char *file);
 t_bool	parse_map(t_game *game, t_parser *parser);

@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:43:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 13:28:54 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 17:03:04 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 typedef struct s_texture_data
 {
 	void	*textures[TEXTURE_COUNT];
-	char    *addr[TEXTURE_COUNT];
-	int     bpp[TEXTURE_COUNT];
-	int     line[TEXTURE_COUNT];
-	int     width[TEXTURE_COUNT];
-	int     height[TEXTURE_COUNT];
-	int     endian[TEXTURE_COUNT];
-} t_texture_data;
+	char	*addr[TEXTURE_COUNT];
+	int		bpp[TEXTURE_COUNT];
+	int		line[TEXTURE_COUNT];
+	int		width[TEXTURE_COUNT];
+	int		height[TEXTURE_COUNT];
+	int		endian[TEXTURE_COUNT];
+}	t_texture_data;
 
 typedef struct s_img_data
 {
@@ -33,19 +33,19 @@ typedef struct s_img_data
 	int		bpp;
 	int		line_len;
 	int		endian;
-} t_img_data;
+}	t_img_data;
 
 typedef struct s_mlx
 {
-	void	*mlx_ptr;
-	void	*win;
-	void	*img;
-	t_uint 	colors[COLOR_COUNT];
-	int		width;
-	int		height;
+	t_uint			colors[COLOR_COUNT];
 	t_texture_data	tex_data;
 	t_img_data		img_data;
-} t_mlx;
+	void			*mlx_ptr;
+	void			*win;
+	void			*img;
+	int				width;
+	int				height;
+}	t_mlx;
 
 typedef struct s_game
 {
@@ -54,6 +54,6 @@ typedef struct s_game
 	t_bool		key_is_pressed[ASCII];
 	char		*path[TEXTURE_COUNT];
 	double		player[PLAYER_INFO_COUNT];
-} t_game;
+}	t_game;
 
 #endif

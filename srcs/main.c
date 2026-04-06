@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:26:21 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 14:15:16 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 17:03:57 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static int	game_loop(t_game *game)
 		destroy_game(game);
 	draw_floor_and_sky(&game->mlx);
 	raycast(game);
-	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win, game->mlx.img, 0, 0);
+	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win, game->mlx.img,
+		0, 0);
 	move_player(game, ft_get_deltat(&start));
 	return (SUCCESS);
 }

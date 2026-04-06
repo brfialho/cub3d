@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 12:52:48 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 16:02:57 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/04/06 17:06:49 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 
-static int	get_texture(int side, int step_x, int step_y);
-static void	print_wall(t_mlx *mlx, t_wall_data *data, int x);
+static int		get_texture(int side, int step_x, int step_y);
+static void		print_wall(t_mlx *mlx, t_wall_data *data, int x);
 static t_wall	init_wall(t_mlx *mlx, double distance,	
-	double wall_x, int texture);
+					double wall_x, int texture);
 
 void	draw_wall(t_ray *ray, t_game *game, int i)
 {
@@ -62,7 +62,7 @@ static void	print_wall(t_mlx *mlx, t_wall_data *data, int x)
 	while (y < wall.end)
 	{
 		tex_y = (y - real_start) * mlx->tex_data.height[data->texture]
-				/ wall.height;
+			/ wall.height;
 		if (tex_y < 0)
 			tex_y = 0;
 		if (tex_y >= mlx->tex_data.height[data->texture])
@@ -109,4 +109,3 @@ static t_wall	init_wall(t_mlx *mlx, double distance,
 		wall.tex_x = mlx->tex_data.width[texture] - 1;
 	return (wall);
 }
-

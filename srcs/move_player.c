@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 23:36:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 16:58:43 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 17:05:50 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,17 @@ void	move_player(t_game *game, long delta_t)
 	double	speed;
 	double	turn_speed;
 
-	speed = (MOVE_SPEED * (((double)delta_t / (double)ONE_SIXTIETH_OF_SEC)) 
+	speed = (MOVE_SPEED * (((double)delta_t / (double)ONE_SIXTIETH_OF_SEC))
 			* (delta_t < ONE_SIXTIETH_OF_SEC))
-			+ (MOVE_SPEED * (delta_t >= ONE_SIXTIETH_OF_SEC));
+		+ (MOVE_SPEED * (delta_t >= ONE_SIXTIETH_OF_SEC));
 	turn_speed = TURN_SPEED * ((double)delta_t / (double)ONE_SIXTIETH_OF_SEC);
 	angle = (game->key_is_pressed[LEFT_ARROW] * -turn_speed)
 		+ game->key_is_pressed[RIGHT_ARROW] * turn_speed;
 	rotate_player(game, angle);
 	update_player_pos(game, game->player[POS_X]
 		+ move_x(game->key_is_pressed,
-			game->player[DIR_X], game->player[DIR_Y], speed), game->player[POS_Y]
+			game->player[DIR_X], game->player[DIR_Y], speed),
+		game->player[POS_Y]
 		+ move_y(game->key_is_pressed,
 			game->player[DIR_X], game->player[DIR_Y], speed));
 }
@@ -122,11 +123,13 @@ static void	update_player_pos(t_game *game, double new_x, double new_y)
 
 	diff = new_x - game->player[POS_X];
 	map = (char **)game->map.tab;
-	found_wall = (map[(int)game->player[POS_Y]][(int)(new_x + (diff * 4))] == '1');
+	found_wall = (map[(int)game->player[POS_Y]]
+		[(int)(new_x + (diff * 4))] == '1');
 	game->player[POS_X] = found_wall * game->player[POS_X]
 		+ !found_wall * new_x;
 	diff = new_y - game->player[POS_Y];
-	found_wall = (map[(int)(new_y + (diff * 4))][(int)game->player[POS_X]] == '1');
+	found_wall = (map[(int)(new_y + (diff * 4))]
+		[(int)game->player[POS_X]] == '1');
 	game->player[POS_Y] = found_wall * game->player[POS_Y]
 		+ !found_wall * new_y;
 }

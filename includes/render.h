@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:06:12 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 13:28:58 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 17:01:38 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@
 
 typedef struct s_wall_data
 {
-    double  distance;
-    double  wall_x;
-    int     texture;
-}   t_wall_data;
+	double	distance;
+	double	wall_x;
+	int		texture;
+}	t_wall_data;
 
 typedef struct s_wall
 {
-    int	height;
-    int	start;
-    int	end;
-    int	tex_x;
-}   t_wall;
+	int	height;
+	int	start;
+	int	end;
+	int	tex_x;
+}	t_wall;
 
 typedef struct s_ray
 {

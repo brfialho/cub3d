@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:46:27 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 16:33:44 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 17:03:20 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 # define VALID_MAP_CHARS "01 NSEW\n"
 # define PLAYER_CHARS "NSEW"
 // Type count is TEXTURE_COUNT + COLOR_COUNT
-# define TYPE_COUNT 4 + 2
+# define TYPE_COUNT 6
 # define NO_COLOR 0xFFFFFFFF
 
 // PLAYER
