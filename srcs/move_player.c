@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 23:36:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/29 21:30:48 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/04/06 12:34:02 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static double	move_x(char *key, double dir_x, double dir_y)
 					* MOVE_SPEED * -dir_y)
 				+ ((dir_x < 0) * (dir_y < 0)
 					* MOVE_SPEED * -dir_y)
-				+ ((dir_y < 0) * MOVE_SPEED * -dir_y)
-				+ ((dir_y > 0) * MOVE_SPEED * -dir_y)
+				+ ((dir_y < 0) * !dir_x * MOVE_SPEED * -dir_y)
+				+ ((dir_y > 0) * !dir_x * MOVE_SPEED * -dir_y)
 			))
 		+ ((key['a']) * (
 				((dir_x > 0) * (dir_y < 0)
@@ -75,8 +75,8 @@ static double	move_x(char *key, double dir_x, double dir_y)
 					* MOVE_SPEED * dir_y)
 				+ ((dir_x < 0) * (dir_y < 0)
 					* MOVE_SPEED * dir_y)
-				+ ((dir_y < 0) * MOVE_SPEED * dir_y)
-				+ ((dir_y > 0) * MOVE_SPEED * dir_y))));
+				+ ((dir_y < 0) * !dir_x * MOVE_SPEED * dir_y)
+				+ ((dir_y > 0) * !dir_x * MOVE_SPEED * dir_y))));
 }
 
 static double	move_y(char *key, double dir_x, double dir_y)
@@ -92,8 +92,8 @@ static double	move_y(char *key, double dir_x, double dir_y)
 					* MOVE_SPEED * dir_x)
 				+ ((dir_x < 0) * (dir_y < 0)
 					* MOVE_SPEED * dir_x)
-				+ ((dir_x < 0) * MOVE_SPEED * dir_x)
-				+ ((dir_x > 0) * MOVE_SPEED * dir_x)
+				+ ((dir_x < 0) * !dir_y * MOVE_SPEED * dir_x)
+				+ ((dir_x > 0) * !dir_y * MOVE_SPEED * dir_x)
 			))
 		+ ((key['a']) * (
 				((dir_x > 0) * (dir_y < 0)
@@ -104,8 +104,8 @@ static double	move_y(char *key, double dir_x, double dir_y)
 					* MOVE_SPEED * -dir_x)
 				+ ((dir_x < 0) * (dir_y < 0)
 					* MOVE_SPEED * -dir_x)
-				+ ((dir_x < 0) * MOVE_SPEED * -dir_x)
-				+ ((dir_x > 0) * MOVE_SPEED * -dir_x))));
+				+ ((dir_x < 0) * !dir_y * MOVE_SPEED * -dir_x)
+				+ ((dir_x > 0) * !dir_y * MOVE_SPEED * -dir_x))));
 }
 
 static void	update_player_pos(t_game *game, double new_x, double new_y)
