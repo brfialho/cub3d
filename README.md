@@ -133,23 +133,9 @@ C 225,30,0
 
 This project incorporated artificial intelligence assistance for the following tasks:
 
-### Code Optimization & Debugging
-
-- **Raycasting Algorithm Refinement** - AI helped optimize the core raycasting loop and wall intersection calculations
-- **Memory Management Verification** - AI validated manual memory allocation/deallocation patterns and identified potential leaks
+- **Documentation** - AI helped generate this README and inline code comments
 - **Build System Configuration** - AI assisted in Makefile optimization and dependency management
 
-### Development Support
-
-- **Parser Implementation** - AI provided guidance on robust `.cub` file parsing and error handling
-- **Code Structure** - AI suggested modular organization with separate files for parsing, rendering, and game logic
-- **Documentation** - AI helped generate this README and inline code comments
-
-### Areas NOT Assisted by AI
-
-- **Core Algorithm Logic** - Raycasting mathematics and physics calculations were manually implemented
-- **Creative Design** - Map layout, color schemes, and game mechanics were developer-designed
-- **Direct Code Writing** - No code was generated directly; AI provided guidance and suggestions only
 
 ---
 
@@ -193,9 +179,9 @@ All memory is properly managed and tested with `valgrind` for leak detection.
 
 ## Author
 
-**brfialho** - 42 Student
+**[brfialho](https://github.com/brfialho)** - 42 Student
 
-**gbercaco** - 42 Student
+**[gbercaco](https://github.com/gustavo-bercacollo)** - 42 Student
 
 ---
 
