@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:43:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 13:11:29 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 13:21:13 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,25 @@
 # include "libft.h"
 # include "defines.h"
 
+typedef struct s_texture_data
+{
+	void	*textures[TEXTURE_COUNT];
+	char    *addr[TEXTURE_COUNT];
+	int     bpp[TEXTURE_COUNT];
+	int     line[TEXTURE_COUNT];
+	int     width[TEXTURE_COUNT];
+	int     height[TEXTURE_COUNT];
+	int     endian[TEXTURE_COUNT];
+} t_texture_data;
+
+typedef struct s_img_data
+{
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+} t_img_data;
+
 typedef struct s_mlx
 {
 	void	*mlx_ptr;
@@ -24,21 +43,8 @@ typedef struct s_mlx
 	t_uint 	colors[COLOR_COUNT];
 	int		width;
 	int		height;
-	
-	//image data
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	
-	// texture data
-	void	*textures[TEXTURE_COUNT];
-	char    *tex_addr[TEXTURE_COUNT];
-	int     tex_bpp[TEXTURE_COUNT];
-	int     tex_line[TEXTURE_COUNT];
-	int     tex_width[TEXTURE_COUNT];
-	int     tex_height[TEXTURE_COUNT];
-	int     tex_endian[TEXTURE_COUNT];
+	t_texture_data	tex_data;
+	t_img_data		img_data;
 } t_mlx;
 
 typedef struct s_game

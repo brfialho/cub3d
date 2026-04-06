@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy.c                                          :+:      :+:    :+:   */
+/*   destroy_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:55:56 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/25 16:34:53 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 13:26:17 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	destroy_mlx(t_mlx *mlx)
 
 	i = -1;
 	while (++i < TEXTURE_COUNT)
-		if (mlx->textures[i])
-			mlx_destroy_image(mlx->mlx_ptr, mlx->textures[i]);
+		if (mlx->tex_data.textures[i])
+			mlx_destroy_image(mlx->mlx_ptr, mlx->tex_data.textures[i]);
 	if (mlx->img)
 		mlx_destroy_image(mlx->mlx_ptr, mlx->img);
 	if (mlx->win)

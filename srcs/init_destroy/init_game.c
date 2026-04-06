@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:53:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/29 21:05:26 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/04/06 13:23:21 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,22 @@ static t_bool	init_mlx_display(t_mlx	*mlx, char **path)
 	i = -1;
 	while (++i < TEXTURE_COUNT)
 	{
-		mlx->textures[i] = mlx_xpm_file_to_image(mlx->mlx_ptr, path[i],
-				&mlx->tex_width[i], &mlx->tex_height[i]);
-		if (!mlx->textures[i])
+		mlx->tex_data.textures[i] = mlx_xpm_file_to_image(mlx->mlx_ptr, path[i],
+				&mlx->tex_data.width[i], &mlx->tex_data.height[i]);
+		if (!mlx->tex_data.textures[i])
 			return (FAILURE);
-		mlx->tex_addr[i] = mlx_get_data_addr(mlx->textures[i], &mlx->tex_bpp[i],
-				&mlx->tex_line[i], &mlx->tex_endian[i]);
-		if (!mlx->tex_addr[i])
+		mlx->tex_data.addr[i] = mlx_get_data_addr(mlx->tex_data.textures[i],
+			&mlx->tex_data.bpp[i],
+			&mlx->tex_data.line[i], &mlx->tex_data.endian[i]);
+		if (!mlx->tex_data.addr[i])
 			return (FAILURE);
 	}
 	mlx->win = mlx_new_window(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, TITLE);
 	mlx->img = mlx_new_image(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	if (!mlx->win || !mlx->img)
 		return (FAILURE);
-	return (!(mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bpp,
-				&mlx->line_len, &mlx->endian)));
+	return (!(mlx->img_data.addr = mlx_get_data_addr(mlx->img, &mlx->img_data.bpp,
+				&mlx->img_data.line_len, &mlx->img_data.endian)));
 }
 
 static void	set_player(t_tab *map, double *player)

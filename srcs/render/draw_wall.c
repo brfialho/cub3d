@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 12:52:48 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 13:10:22 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 13:24:58 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,12 @@ static void	print_wall(t_mlx *mlx, t_wall_data *data, int x)
 	y = wall.start;
 	while (y < wall.end)
 	{
-		tex_y = (y - real_start) * mlx->tex_height[data->texture] / wall.height;
+		tex_y = (y - real_start) * mlx->tex_data.height[data->texture]
+				/ wall.height;
 		if (tex_y < 0)
 			tex_y = 0;
-		if (tex_y >= mlx->tex_height[data->texture])
-			tex_y = mlx->tex_height[data->texture] - 1;
+		if (tex_y >= mlx->tex_data.height[data->texture])
+			tex_y = mlx->tex_data.height[data->texture] - 1;
 		tex_pixel = return_pixel(mlx, wall.tex_x, tex_y, data->texture);
 		put_pixel(mlx, x, y, tex_pixel);
 		y++;
@@ -101,11 +102,11 @@ static t_wall	init_wall(t_mlx *mlx, double distance,
 	wall.height = (int)(WIN_HEIGHT / distance);
 	wall.start = (WIN_HEIGHT - wall.height) / 2;
 	wall.end = wall.start + wall.height;
-	wall.tex_x = (int)(wall_x * mlx->tex_width[texture]);
+	wall.tex_x = (int)(wall_x * mlx->tex_data.width[texture]);
 	if (wall.tex_x < 0)
 		wall.tex_x = 0;
-	if (wall.tex_x >= mlx->tex_width[texture])
-		wall.tex_x = mlx->tex_width[texture] - 1;
+	if (wall.tex_x >= mlx->tex_data.width[texture])
+		wall.tex_x = mlx->tex_data.width[texture] - 1;
 	return (wall);
 }
 
