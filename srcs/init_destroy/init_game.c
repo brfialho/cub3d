@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:53:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 17:07:21 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 19:49:49 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ static void	fill_player_data(double *player, int row, int col, unsigned int c)
 {
 	static const double	spawn[ASCII][4] = {
 	['N'] = {0.0, -1.0, MAX_FOV, 0.0},
-	['S'] = {0.0, 1.0, MAX_FOV, 0.0},
+	['S'] = {0.0, 1.0, -MAX_FOV, 0.0},
 	['E'] = {1.0, 0.0, 0.0, MAX_FOV},
-	['W'] = {-1.0, 0.0, 0.0, MAX_FOV}
+	['W'] = {-1.0, 0.0, 0.0, -MAX_FOV}
 	};
 
 	player[POS_X] = col;
