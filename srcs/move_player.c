@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 23:36:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 14:13:48 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 16:58:43 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	move_player(t_game *game, long delta_t)
 	double	speed;
 	double	turn_speed;
 
-	speed = MOVE_SPEED * ((double)delta_t / (double)ONE_SIXTIETH_OF_SEC);
+	speed = (MOVE_SPEED * (((double)delta_t / (double)ONE_SIXTIETH_OF_SEC)) 
+			* (delta_t < ONE_SIXTIETH_OF_SEC))
+			+ (MOVE_SPEED * (delta_t >= ONE_SIXTIETH_OF_SEC));
 	turn_speed = TURN_SPEED * ((double)delta_t / (double)ONE_SIXTIETH_OF_SEC);
 	angle = (game->key_is_pressed[LEFT_ARROW] * -turn_speed)
 		+ game->key_is_pressed[RIGHT_ARROW] * turn_speed;
