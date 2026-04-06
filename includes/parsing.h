@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:52:38 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 13:28:08 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 16:22:02 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct s_parser
 {
-	t_bool		has_error;
+	t_bool		status;
 	t_bool		in_map;
 	int			fd;
 	char		*line;

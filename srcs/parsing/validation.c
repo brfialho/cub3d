@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:14:45 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/28 03:02:04 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 16:37:42 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_bool	validate_filename(char *file)
 
 	len = ft_strlen(file);
 	if (len < 5 || ft_strcmp((file + len - 4), ".cub"))
-		return (FAILURE);
+		return (ft_printf(TITLE ": error: invalid file\n"), FAILURE);
 	return (SUCCESS);
 }
 
@@ -40,10 +40,10 @@ t_bool	validate_map(t_tab map)
 			player_count += ft_str_charcount(PLAYER_CHARS,
 					((char **)map.tab)[row][col]);
 			if (check_for_open_border(map, row, col))
-				return (FAILURE);
+				return (ERROR_OPEN_BORDER);
 		}
 	}
-	return ((player_count != 1));
+	return ((player_count != 1) * ERROR_MAP);
 }
 
 static t_bool	check_for_open_border(t_tab map, int row, int col)
@@ -51,7 +51,7 @@ static t_bool	check_for_open_border(t_tab map, int row, int col)
 	if (!row || !col || row == (int)map.rows - 1 || col == (int)map.cols - 1)
 	{
 		if (!ft_str_charcount("1 ", ((char **)map.tab)[row][col]))
-			return (FAILURE);
+			return (ERROR_OPEN_BORDER);
 	}
 	else if (((char **)map.tab)[row][col] == ' '
 		&& (!ft_str_charcount(" 1", ((char **)map.tab)[row - 1][col -1])
@@ -62,6 +62,6 @@ static t_bool	check_for_open_border(t_tab map, int row, int col)
 		|| !ft_str_charcount(" 1", ((char **)map.tab)[row + 1][col - 1])
 		|| !ft_str_charcount(" 1", ((char **)map.tab)[row + 1][col])
 		|| !ft_str_charcount(" 1", ((char **)map.tab)[row + 1][col + 1])))
-		return (FAILURE);
+		return (ERROR_OPEN_BORDER);
 	return (SUCCESS);
 }

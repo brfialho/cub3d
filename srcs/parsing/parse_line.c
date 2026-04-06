@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:56:04 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/28 03:01:51 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 16:35:26 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ t_bool	parse_line(t_game *game, t_parser *parser)
 		return (SUCCESS);
 	split = ft_split(parser->line, ' ');
 	if (ft_split_len(split) != 2)
-		return (ft_split_free(split), FAILURE);
+		return (ft_split_free(split), ERROR_INLINE_MULTI_ELEMT);
 	item = -1;
 	while (ft_strcmp(split[0], parser->elements[++item]))
 		if (item > TYPE_COUNT - 1)
-			return (ft_split_free(split), FAILURE);
+			return (ft_split_free(split), ERROR_IDENTIFIER);
 	status = SUCCESS;
 	if (item < TEXTURE_COUNT && !game->path[item])
 	{
@@ -38,7 +38,7 @@ t_bool	parse_line(t_game *game, t_parser *parser)
 	else if (game->mlx.colors[item - TEXTURE_COUNT] == NO_COLOR)
 		status = set_color(&game->mlx.colors[item - TEXTURE_COUNT], split[1]);
 	else
-		status = FAILURE;
+		status = ERROR_REPEAT_ELEMENT;
 	ft_split_free(split);
 	return (status);
 }
@@ -51,15 +51,15 @@ static t_bool	set_color(t_uint *color, char *color_str)
 
 	split = ft_split(color_str, ',');
 	if (ft_split_len(split) != 3 || ft_strlen(split[2]) == 1)
-		return (ft_split_free(split), FAILURE);
+		return (ft_split_free(split), ERROR_C_MULTI);
 	i = -1;
 	while (++i < 3)
 	{
 		if (!ft_str_allinset(split[i], "0123456789\n"))
-			return (ft_split_free(split), FAILURE);
+			return (ft_split_free(split), ERROR_C_NUM);
 		rgb[i] = ft_atoi(split[i]);
 		if (rgb[i] > 0xFF || rgb[i] < 0)
-			return (ft_split_free(split), FAILURE);
+			return (ft_split_free(split), ERROR_C_VALUE);
 	}
 	*color = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
 	ft_split_free(split);

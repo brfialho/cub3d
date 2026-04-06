@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:56:57 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/22 08:14:50 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 16:08:11 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_bool	parse_map(t_game *game, t_parser *parser)
 	size_t	buffer_len;
 
 	if (check_for_missing_elements(game))
-		return (FAILURE);
+		return (ERROR_MULTI_ELEMT);
 	(void)parser;
 	dump_map = ft_strdup("");
 	buffer = ft_strdup(parser->line);
@@ -35,7 +35,7 @@ t_bool	parse_map(t_game *game, t_parser *parser)
 			max_len = ft_strlen(buffer);
 		if (!ft_strcmp(buffer, "\n")
 			|| !ft_str_allinset(buffer, VALID_MAP_CHARS))
-			return (free(buffer), free(dump_map), FAILURE);
+			return (free(buffer), free(dump_map), ERROR_MAP);
 		dump_map = ft_strjoin_free(dump_map, buffer, TRUE, TRUE);
 		buffer = get_next_line(parser->fd);
 	}

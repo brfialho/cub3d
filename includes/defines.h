@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:46:27 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/29 20:59:33 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/04/06 16:33:44 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,19 @@
 # define FLOOR 1
 
 // PARSER
+# define ERROR_PARSER 1
+# define ERROR_MAP 2
+# define ERROR_MULTI_ELEMT 10
+# define ERROR_INLINE_MULTI_ELEMT 3
+# define ERROR_REPEAT_ELEMENT 11
+# define ERROR_IDENTIFIER 4
+# define ERROR_C_MULTI 5
+# define ERROR_C_NUM 6
+# define ERROR_C_VALUE 7
+
+# define ERROR_OPEN_BORDER 8
+# define ERROR_PLAYER_COUNT 9
+
 # define VALID_MAP_CHARS "01 NSEW\n"
 # define PLAYER_CHARS "NSEW"
 // Type count is TEXTURE_COUNT + COLOR_COUNT
