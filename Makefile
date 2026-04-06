@@ -26,9 +26,10 @@ SRC= srcs/init_destroy/destroy_game.c \
 	 srcs/parsing/parse_line.c \
 	 srcs/parsing/parse_map.c \
 	 srcs/parsing/validation.c \
-	 srcs/render/render.c \
+	 srcs/render/draw_floor_sky.c \
+	 srcs/render/draw_wall.c \
 	 srcs/render/raycast.c \
-	 srcs/render/raycast_utils.c \
+	 srcs/render/render_utils.c \
 	 srcs/move_player.c \
 
 O_DIR= obj/

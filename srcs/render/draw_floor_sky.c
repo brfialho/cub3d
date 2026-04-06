@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   draw_floor_sky.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 16:30:08 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 13:12:14 by brfialho         ###   ########.fr       */
+/*   Created: 2026/03/21 22:25:32 by gbercaco          #+#    #+#             */
+/*   Updated: 2026/04/06 13:10:16 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#include "render.h"
 
-# include "libft.h"
-# include "defines.h"
-# include "structs.h"
-# include "parsing.h"
-# include "render.h"
-# include "mlx.h"
-# include <sys/time.h>
-# include <math.h>
+void	draw_floor_and_sky(t_mlx *mlx)
+{
+	int	y;
+	int	x;
 
-int		destroy_game(t_game *game);
-t_bool	init_game(t_game *game);
+	y = -1;
+	while (++y < WIN_HEIGHT / 2)
+	{
+		x = -1;
+		while (++x < WIN_WIDTH)
+			put_pixel(mlx, x, y, 0xADD8E6);
+	}
+	while (y < WIN_HEIGHT)
+	{
+		x = -1;
+		while (++x < WIN_WIDTH)
+			put_pixel(mlx, x, y, 0x8B4513);
+		y++;
+	}
+}
 
-//render
 
 
-void	raycast(t_game *game);
-void	move_player(t_game *game);
 
-#endif

@@ -3,43 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbercaco <gbercaco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 19:24:11 by gbercaco          #+#    #+#             */
-/*   Updated: 2026/03/29 20:54:53 by gbercaco         ###   ########.fr       */
+/*   Updated: 2026/04/06 13:10:33 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
-#include "math.h"
-#include <stdio.h>
+#include "render.h"
 
-static void	draw_wall(t_ray *ray, t_game *game, int i)
-{
-	t_wall_data	data;
-	double		perp_dist;
-
-	data.texture = get_texture(ray->side, ray->step_x, ray->step_y);
-	if (ray->side == 0)
-	{
-		data.distance = ray->side_dist_x - ray->delta_dist_x;
-		data.wall_x = game->player[POS_Y] + data.distance * ray->ray_dir_y;
-	}
-	else
-	{
-		data.distance = ray->side_dist_y - ray->delta_dist_y;
-		data.wall_x = game->player[POS_X] + data.distance * ray->ray_dir_x;
-	}
-	perp_dist = data.distance * (ray->ray_dir_x * game->player[DIR_X]
-			+ ray->ray_dir_y * game->player[DIR_Y]);
-	data.distance = perp_dist;
-	data.wall_x -= (int)data.wall_x;
-	if (ray->side == 0 && ray->ray_dir_x > 0)
-		data.wall_x = 1.0 - data.wall_x;
-	if (ray->side == 1 && ray->ray_dir_y < 0)
-		data.wall_x = 1.0 - data.wall_x;
-	print_wall(&game->mlx, &data, i);
-}
+static void	dda_step(t_ray *ray);
+static void	init_ray(t_ray *ray, t_game *game, int i);
+static void	set_steps(t_ray *ray);
+static void	set_dist(t_ray *ray, t_game *game);
 
 void	raycast(t_game *game)
 {
@@ -60,4 +36,63 @@ void	raycast(t_game *game)
 			}
 		}
 	}
+}
+
+static void	dda_step(t_ray *ray)
+{
+	if (ray->side_dist_x < ray->side_dist_y)
+	{
+		ray->side_dist_x += ray->delta_dist_x;
+		ray->map_x += ray->step_x;
+		ray->side = 0;
+	}
+	else
+	{
+		ray->side_dist_y += ray->delta_dist_y;
+		ray->map_y += ray->step_y;
+		ray->side = 1;
+	}
+}
+
+static void	init_ray(t_ray *ray, t_game *game, int i)
+{
+	double	camera_x;
+
+	camera_x = 2 * i / (double)WIN_WIDTH - 1;
+	ray->ray_dir_x = game->player[DIR_X] + game->player[FOV_X] * camera_x;
+	ray->ray_dir_y = game->player[DIR_Y] + game->player[FOV_Y] * camera_x;
+	ray->map_x = (int)game->player[POS_X];
+	ray->map_y = (int)game->player[POS_Y];
+	set_dist(ray, game);
+	set_steps(ray);
+}
+
+static void	set_dist(t_ray *ray, t_game *game)
+{
+	ray->delta_dist_x = fabs(1.0 / ray->ray_dir_x);
+	ray->delta_dist_y = fabs(1.0 / ray->ray_dir_y);
+	if (ray->ray_dir_x < 0)
+		ray->side_dist_x = (game->player[POS_X] - ray->map_x)
+			* ray->delta_dist_x;
+	else
+		ray->side_dist_x = (ray->map_x + 1.0 - game->player[POS_X])
+			* ray->delta_dist_x;
+	if (ray->ray_dir_y < 0)
+		ray->side_dist_y = (game->player[POS_Y] - ray->map_y)
+			* ray->delta_dist_y;
+	else
+		ray->side_dist_y = (ray->map_y + 1.0 - game->player[POS_Y])
+			* ray->delta_dist_y;
+}
+
+static void	set_steps(t_ray *ray)
+{
+	if (ray->ray_dir_x < 0)
+		ray->step_x = -1;
+	else
+		ray->step_x = 1;
+	if (ray->ray_dir_y < 0)
+		ray->step_y = -1;
+	else
+		ray->step_y = 1;
 }
