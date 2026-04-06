@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:54:42 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 16:38:18 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 20:53:04 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ t_bool	parsing(t_game *game, char *file)
 
 static t_bool	init_parser(t_parser *parser, char *file, t_game *game)
 {
-	ft_bzero(game, sizeof(t_game));
 	ft_bzero(parser, sizeof(t_parser));
 	game->mlx.colors[CEILING] = NO_COLOR;
 	game->mlx.colors[FLOOR] = NO_COLOR;
