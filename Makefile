@@ -36,7 +36,7 @@ O_DIR= obj/
 OBJ= $(SRC:%.c=$(O_DIR)%.o)
 MAIN_OBJ= $(MAIN_SRC:%.c=$(O_DIR)%.o)
 
-NAME= cub3d
+NAME= cub3D
 
 LIBPATH= libft/
 LIBFT= $(LIBPATH)libft.a
