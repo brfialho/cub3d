@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 04:52:38 by brfialho          #+#    #+#             */
-/*   Updated: 2026/03/25 16:36:53 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 13:28:08 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 # include "structs.h"
 # include <sys/stat.h>
 # include <fcntl.h>
+
+typedef struct s_parser
+{
+	t_bool		has_error;
+	t_bool		in_map;
+	int			fd;
+	char		*line;
+	char		*elements[TYPE_COUNT];
+} t_parser;
 
 t_bool	parsing(t_game *game, char *file);
 t_bool	parse_map(t_game *game, t_parser *parser);
