@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 12:52:48 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 17:06:49 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 19:37:51 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,16 @@ static int	get_texture(int side, int step_x, int step_y)
 	if (side == 0)
 	{
 		if (step_x > 0)
-			texture = WEST;
-		else
 			texture = EAST;
+		else
+			texture = WEST;
 	}
 	else
 	{
 		if (step_y > 0)
-			texture = NORTH;
-		else
 			texture = SOUTH;
+		else
+			texture = NORTH;
 	}
 	return (texture);
 }
