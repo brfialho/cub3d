@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 17:46:27 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 17:03:20 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 20:44:55 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define DEFINES_H
 
 // GAME
-# define TITLE "Cub3d"
+# define TITLE "Cub3D"
 
 // MLX
 # define WIN_WIDTH 1024

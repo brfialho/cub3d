@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 20:53:17 by brfialho          #+#    #+#             */
-/*   Updated: 2026/04/06 19:49:49 by brfialho         ###   ########.fr       */
+/*   Updated: 2026/04/06 20:44:34 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_bool	init_mlx_display(t_mlx	*mlx, char **path)
 		mlx->tex_data.textures[i] = mlx_xpm_file_to_image(mlx->mlx_ptr, path[i],
 				&mlx->tex_data.width[i], &mlx->tex_data.height[i]);
 		if (!mlx->tex_data.textures[i])
-			return (FAILURE);
+			return (ft_printf(TITLE ": error: invalid texture path\n"), 1);
 		mlx->tex_data.addr[i] = mlx_get_data_addr(mlx->tex_data.textures[i],
 				&mlx->tex_data.bpp[i],
 				&mlx->tex_data.line[i], &mlx->tex_data.endian[i]);
